@@ -32,6 +32,7 @@ export default function UploadPage() {
   const [dragOver, setDragOver] = useState(false)
   const [analysisResult, setAnalysisResult] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [abortController, setAbortController] = useState<AbortController | null>(null)
 
   const handleFiles = useCallback((newFiles: FileList | null) => {
     if (!newFiles) return
@@ -58,11 +59,22 @@ export default function UploadPage() {
     )
   }
 
+  const handleCancel = () => {
+    if (abortController) {
+      abortController.abort()
+      setAbortController(null)
+    }
+    setState('idle')
+  }
+
   const handleSubmit = async () => {
     if (files.length === 0) return
 
+    const controller = new AbortController()
+    setAbortController(controller)
     setState('uploading')
     setError(null)
+    setAnalysisResult(null)
 
     try {
       const formData = new FormData()
@@ -77,6 +89,7 @@ export default function UploadPage() {
       const response = await fetch('/api/analyze', {
         method: 'POST',
         body: formData,
+        signal: controller.signal,
       })
 
       if (!response.ok) {
@@ -84,12 +97,42 @@ export default function UploadPage() {
         throw new Error(errData.error || 'Analysis failed')
       }
 
-      const result = await response.json()
-      setAnalysisResult(result.report)
+      const reader = response.body?.getReader()
+      if (!reader) throw new Error('No response stream')
+
+      const decoder = new TextDecoder()
+      let reportText = ''
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value, { stream: true })
+        const lines = chunk.split('\n\n').filter(Boolean)
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue
+          const data = JSON.parse(line.slice(6))
+
+          if (data.type === 'delta') {
+            reportText += data.text
+            setAnalysisResult(reportText)
+          } else if (data.type === 'error') {
+            throw new Error(data.error)
+          }
+        }
+      }
+
       setState('complete')
     } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        setState('idle')
+        return
+      }
       setError(err instanceof Error ? err.message : 'Something went wrong')
       setState('error')
+    } finally {
+      setAbortController(null)
     }
   }
 
@@ -111,6 +154,31 @@ export default function UploadPage() {
               All files are encrypted and deleted after analysis.
             </p>
           </motion.div>
+
+          {/* Streaming analysis in progress */}
+          {state === 'analyzing' && analysisResult && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-8 mb-6"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <Loader2 className="w-6 h-6 text-blue-400 animate-spin" />
+                  <h2 className="text-xl font-bold text-white">Analyzing...</h2>
+                </div>
+                <button
+                  onClick={handleCancel}
+                  className="text-sm text-gray-400 hover:text-red-400 transition-colors px-3 py-1 border border-gray-700 rounded-lg"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div className="text-gray-300 leading-relaxed whitespace-pre-wrap text-sm">
+                {analysisResult}
+              </div>
+            </motion.div>
+          )}
 
           {state === 'complete' && analysisResult ? (
             <motion.div

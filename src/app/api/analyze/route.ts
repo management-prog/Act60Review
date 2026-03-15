@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
+
+export const maxDuration = 120
 
 function getAnthropic() {
   const apiKey = process.env.ANTHROPIC_API_KEY
@@ -52,7 +54,7 @@ export async function POST(request: NextRequest) {
   try {
     const apiKey = process.env.ANTHROPIC_API_KEY
     if (!apiKey) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'Service not configured. Please contact support.' },
         { status: 503 }
       )
@@ -63,24 +65,22 @@ export async function POST(request: NextRequest) {
     const labels = formData.getAll('labels') as string[]
 
     if (files.length === 0) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'No files uploaded' },
         { status: 400 }
       )
     }
 
-    // Validate file sizes
     const maxSize = 25 * 1024 * 1024
     for (const file of files) {
       if (file.size > maxSize) {
-        return NextResponse.json(
+        return Response.json(
           { error: `File ${file.name} exceeds 25MB limit` },
           { status: 400 }
         )
       }
     }
 
-    // Process files into content blocks for Claude
     const contentBlocks: Anthropic.Messages.ContentBlockParam[] = []
 
     for (let i = 0; i < files.length; i++) {
@@ -122,7 +122,8 @@ export async function POST(request: NextRequest) {
     })
 
     const anthropic = getAnthropic()
-    const message = await anthropic.messages.create({
+
+    const stream = anthropic.messages.stream({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 8192,
       system: SYSTEM_PROMPT,
@@ -134,21 +135,50 @@ export async function POST(request: NextRequest) {
       ],
     })
 
-    const report = message.content
-      .filter((block): block is Anthropic.Messages.TextBlock => block.type === 'text')
-      .map((block) => block.text)
-      .join('\n')
+    const encoder = new TextEncoder()
 
-    return NextResponse.json({
-      report,
-      usage: {
-        inputTokens: message.usage.input_tokens,
-        outputTokens: message.usage.output_tokens,
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          stream.on('text', (text) => {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'delta', text })}\n\n`))
+          })
+
+          const finalMessage = await stream.finalMessage()
+
+          controller.enqueue(
+            encoder.encode(
+              `data: ${JSON.stringify({
+                type: 'done',
+                usage: {
+                  inputTokens: finalMessage.usage.input_tokens,
+                  outputTokens: finalMessage.usage.output_tokens,
+                },
+              })}\n\n`
+            )
+          )
+
+          controller.close()
+        } catch (err) {
+          const message = err instanceof Error ? err.message : 'Analysis failed'
+          controller.enqueue(
+            encoder.encode(`data: ${JSON.stringify({ type: 'error', error: message })}\n\n`)
+          )
+          controller.close()
+        }
+      },
+    })
+
+    return new Response(readable, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        Connection: 'keep-alive',
       },
     })
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : 'Analysis failed'
-    return NextResponse.json(
+    return Response.json(
       { error: errorMessage },
       { status: 500 }
     )
