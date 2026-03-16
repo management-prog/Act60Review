@@ -12,6 +12,22 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         allow: '/',
         disallow: ['/api/', '/upload'],
       },
+      {
+        userAgent: 'GPTBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'ClaudeBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'PerplexityBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Google-Extended',
+        allow: '/',
+      },
     ],
     sitemap: `https://${host}/sitemap.xml`,
   }

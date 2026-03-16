@@ -1,7 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Loader2 } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
 
 interface PricingProps {
@@ -9,11 +10,33 @@ interface PricingProps {
 }
 
 export default function Pricing({ brand }: PricingProps) {
+  const [loadingTier, setLoadingTier] = useState<string | null>(null)
+
+  async function handleCheckout(tierId: string) {
+    setLoadingTier(tierId)
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier: tierId }),
+      })
+      const data = await res.json()
+      if (data.url) {
+        window.location.href = data.url
+      } else {
+        console.error('Checkout error:', data.error)
+        setLoadingTier(null)
+      }
+    } catch (err) {
+      console.error('Checkout failed:', err)
+      setLoadingTier(null)
+    }
+  }
+
   return (
     <section id="pricing" className="relative py-28 bg-navy-900 noise">
       <div className="section-line" />
 
-      {/* Ambient glow behind pricing */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -62,7 +85,7 @@ export default function Pricing({ brand }: PricingProps) {
           </div>
         </motion.div>
 
-        {/* Pricing cards — from brand config */}
+        {/* Pricing cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] max-w-5xl mx-auto">
           {brand.tiers.map((tier, index) => (
             <motion.div
@@ -107,17 +130,27 @@ export default function Pricing({ brand }: PricingProps) {
                 ))}
               </ul>
 
-              <a
-                href="#pricing"
-                className={`group flex items-center justify-center gap-2 w-full py-3.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 ${
+              <button
+                onClick={() => handleCheckout(tier.id)}
+                disabled={loadingTier !== null}
+                className={`group flex items-center justify-center gap-2 w-full py-3.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 disabled:opacity-60 ${
                   tier.popular
                     ? 'bg-accent text-navy-900 hover:bg-accent-light'
                     : 'border border-white/[0.06] text-slate-300 hover:text-slate-100 hover:border-white/[0.12]'
                 }`}
               >
-                {tier.cta}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-              </a>
+                {loadingTier === tier.id ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    {tier.cta}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                  </>
+                )}
+              </button>
             </motion.div>
           ))}
         </div>
