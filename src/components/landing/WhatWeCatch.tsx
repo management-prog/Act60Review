@@ -1,135 +1,105 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-  FileX,
-  ArrowLeftRight,
-  Globe,
-  MapPin,
-  Calculator,
-  Landmark,
-  TrendingUp,
-  FileText,
-} from 'lucide-react'
 
-// Captology: Specificity builds credibility. Each finding references real IRC/PR code sections.
 const categories = [
   {
-    icon: Calculator,
     title: 'IRC 933 Exclusion Errors',
-    description: 'Incorrect exclusion calculations, missing elections, improperly sourced income treated as PR-source.',
-    example: 'Common miss: Investment income earned before establishing bona fide residency claimed as excluded.',
-    severity: 'critical',
+    severity: 'critical' as const,
+    description: 'Incorrect exclusion calculations, missing elections, improperly sourced income.',
+    example: 'Investment income before residency claimed as excluded.',
   },
   {
-    icon: ArrowLeftRight,
     title: 'Transfer Pricing Red Flags',
-    description: 'Intercompany transactions not at arm\'s length, missing TP documentation, PR 51% disallowance exposure.',
-    example: 'Your mainland S-Corp pays your PR entity 90% of revenue as "services" — IRS sees a manufactured loss.',
-    severity: 'critical',
+    severity: 'critical' as const,
+    description: 'Intercompany transactions not at arm\'s length, missing documentation.',
+    example: 'S-Corp pays PR entity 90% of revenue as "services" \u2014 manufactured loss.',
   },
   {
-    icon: Globe,
     title: 'FBAR & FATCA Gaps',
-    description: 'Missing FinCEN 114, incomplete Form 8938, unreported foreign accounts or signature authority.',
-    example: 'Your Cayman trust account wasn\'t reported on FBAR — that\'s a $100K+ penalty per year.',
-    severity: 'critical',
+    severity: 'critical' as const,
+    description: 'Missing FinCEN 114, incomplete Form 8938, unreported accounts.',
+    example: 'Cayman trust not on FBAR \u2014 $100K+ penalty per year.',
   },
   {
-    icon: MapPin,
     title: 'Residency Test Failures',
-    description: 'Insufficient presence days, missing closer connection documentation, tax home inconsistencies.',
-    example: 'You spent 187 days in PR but your LinkedIn still says "New York" — IRS will challenge residency.',
-    severity: 'high',
+    severity: 'high' as const,
+    description: 'Insufficient presence days, missing closer connection documentation.',
+    example: '187 days in PR but LinkedIn says "New York."',
   },
   {
-    icon: FileX,
-    title: 'Missing or Incorrect Forms',
-    description: 'Absent schedules, wrong filing status, missing informative returns (480 series), unsigned elections.',
-    example: 'Form 480.6 EC not filed for your PR LLC — Hacienda can disallow the entity\'s tax treatment.',
-    severity: 'high',
+    title: 'Missing Forms',
+    severity: 'high' as const,
+    description: 'Absent schedules, wrong filing status, missing 480 series returns.',
+    example: 'Form 480.6 EC not filed \u2014 tax treatment disallowed.',
   },
   {
-    icon: Landmark,
-    title: 'Decree Term Violations',
-    description: 'Activities outside decree scope, expired provisions, non-compliance with annual reporting.',
-    example: 'Your decree covers "technology consulting" but you reported income from "real estate management."',
-    severity: 'high',
-  },
-  {
-    icon: TrendingUp,
     title: 'Capital Gains Sourcing',
-    description: 'Pre-move appreciation taxed at federal rates, incorrect holding period calculations, wash sale issues.',
-    example: 'Stock purchased in 2019, sold in 2025 — the pre-move appreciation from 2019-2022 is NOT exempt.',
-    severity: 'medium',
-  },
-  {
-    icon: FileText,
-    title: 'CPA Quality Issues',
-    description: 'Missed deadlines, inconsistent positions between PR and federal returns, copy-paste errors.',
-    example: 'Your federal return claims $0 PR income but your Planilla shows $450K — IRS sees this mismatch instantly.',
-    severity: 'medium',
+    severity: 'medium' as const,
+    description: 'Pre-move appreciation, incorrect holding periods, wash sales.',
+    example: 'Pre-2022 appreciation is NOT exempt under Act 60.',
   },
 ]
 
-const severityColors: Record<string, string> = {
-  critical: 'bg-red-950/50 text-red-400 border-red-900/30',
-  high: 'bg-orange-950/50 text-orange-400 border-orange-900/30',
-  medium: 'bg-yellow-950/50 text-yellow-400 border-yellow-900/30',
+const severityStyles = {
+  critical: { border: 'border-red-500/20', text: 'text-red-400', bg: 'bg-red-500/[0.06]' },
+  high: { border: 'border-orange-500/20', text: 'text-orange-400', bg: 'bg-orange-500/[0.06]' },
+  medium: { border: 'border-yellow-500/20', text: 'text-yellow-400', bg: 'bg-yellow-500/[0.06]' },
 }
 
 export default function WhatWeCatch() {
   return (
-    <section className="relative py-24 bg-gray-900/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-28 bg-navy-800/50 noise">
+      <div className="section-line" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-3">
+          <p className="text-gold/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             What We Catch
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            200+ Compliance Rules.<br />Eight Critical Categories.
+          <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
+            200+ Rules. Eight Categories.
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            These are the exact issues that trigger IRS audits and Hacienda enforcement actions. Your CPA may have missed them.
+          <p className="text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+            The exact issues that trigger audits and enforcement actions.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {categories.map((cat, index) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:border-gray-700 transition-all"
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-2 bg-gray-800 rounded-lg shrink-0">
-                  <cat.icon className="w-5 h-5 text-blue-400" />
+        {/* Grid table layout — editorial */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.04] border border-white/[0.04]">
+          {categories.map((cat, index) => {
+            const style = severityStyles[cat.severity]
+            return (
+              <motion.div
+                key={cat.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.06 }}
+                className="bg-navy-900 p-7 hover:bg-white/[0.01] transition-colors duration-300"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <h3 className="text-base font-semibold text-slate-100">{cat.title}</h3>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 border uppercase tracking-[0.1em] ${style.border} ${style.text} ${style.bg}`}>
+                    {cat.severity}
+                  </span>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-lg font-semibold text-white">{cat.title}</h3>
-                    <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${severityColors[cat.severity]}`}>
-                      {cat.severity.toUpperCase()}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-400 mb-3">{cat.description}</p>
-                  {/* Captology: Concrete example makes abstract threat real */}
-                  <div className="bg-gray-950/50 border border-gray-800/50 rounded-lg p-3">
-                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Example Finding</p>
-                    <p className="text-sm text-gray-300 italic">&ldquo;{cat.example}&rdquo;</p>
-                  </div>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                  {cat.description}
+                </p>
+                <div className="border-l-2 border-white/[0.06] pl-3">
+                  <p className="text-sm text-slate-500 italic leading-relaxed">
+                    &ldquo;{cat.example}&rdquo;
+                  </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Check, ArrowRight, Zap, Crown, Shield } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
 
 interface PricingProps {
@@ -11,191 +11,185 @@ interface PricingProps {
 const tiers = [
   {
     id: 'basic',
+    tier: 'Essential',
     name: 'Quick Scan',
     price: 299,
-    description: 'Fast AI compliance check. Know your risk level in minutes.',
-    icon: Zap,
+    description: 'AI compliance check. Know your risk in minutes.',
     features: [
-      'AI compliance score (0-100)',
+      'AI compliance score (0\u2013100)',
       'Top 5 risk areas identified',
       'Missing form detection',
       'Basic transfer pricing flags',
       'Actionable recommendations',
-      'PDF report delivered instantly',
+      'PDF report instantly',
     ],
     cta: 'Get Quick Scan',
     popular: false,
-    gradient: 'from-gray-700 to-gray-600',
   },
   {
     id: 'comprehensive',
+    tier: 'Comprehensive',
     name: 'Full Review',
     price: 999,
-    description: 'Comprehensive AI review + CPA verification. The gold standard.',
-    icon: Crown,
+    description: 'Complete AI review + CPA verification. The gold standard.',
     features: [
       'Full return analysis (200+ rules)',
       'Transfer pricing deep dive',
-      'FBAR & Form 8938 cross-check',
+      'FBAR & 8938 cross-check',
       'IRC 933 exclusion verification',
-      'Residency test documentation review',
-      'CPA-verified findings report',
-      'Remediation priority guide',
-      'Email support for 30 days',
+      'Residency test review',
+      'CPA-verified report',
+      'Remediation guide',
+      '30-day email support',
     ],
     cta: 'Get Full Review',
     popular: true,
-    gradient: 'from-blue-600 to-indigo-700',
   },
   {
     id: 'defense',
+    tier: 'Defense',
     name: 'Audit Shield',
     price: 1499,
-    description: 'Everything in Full Review + audit preparation package.',
-    icon: Shield,
+    description: 'Full Review + audit preparation package.',
     features: [
       'Everything in Full Review',
-      'IRS Campaign 685 risk mapping',
-      'Documentation completeness audit',
+      'Campaign 685 risk mapping',
+      'Documentation audit',
       'Presence test gap analysis',
-      'Transfer pricing study evaluation',
-      'Pre-audit response preparation',
-      '30-min CPA consultation call',
-      'Priority support for 90 days',
+      'TP study evaluation',
+      'Pre-audit preparation',
+      '30-min CPA call',
+      '90-day priority support',
     ],
     cta: 'Activate Shield',
     popular: false,
-    gradient: 'from-violet-600 to-purple-800',
   },
 ]
 
-// Captology: Anchoring — show what CPA charges vs our price
-function SavingsAnchor() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="max-w-2xl mx-auto mb-12 bg-gray-900/50 border border-gray-800 rounded-2xl p-6"
-    >
-      <p className="text-sm text-gray-400 text-center mb-4">
-        What decree holders currently pay for the same service:
-      </p>
-      <div className="grid grid-cols-3 gap-4 text-center">
-        <div>
-          <p className="text-2xl font-bold text-gray-500 line-through">$5,000</p>
-          <p className="text-xs text-gray-600">Mid-tier CPA</p>
-        </div>
-        <div>
-          <p className="text-2xl font-bold text-gray-500 line-through">$10,000</p>
-          <p className="text-xs text-gray-600">Specialist Firm</p>
-        </div>
-        <div>
-          <p className="text-2xl font-bold text-gray-500 line-through">$25,000+</p>
-          <p className="text-xs text-gray-600">Big 4 Advisory</p>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
 export default function Pricing({ brand }: PricingProps) {
   return (
-    <section id="pricing" className="relative py-24 bg-gray-950">
-      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent`} />
+    <section id="pricing" className="relative py-28 bg-navy-900 noise">
+      <div className="section-line" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Ambient glow behind pricing */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold/[0.03] rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-10"
         >
-          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-3">
+          <p className="text-gold/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             Pricing
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-            A Fraction of What Your CPA Charges
+          <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
+            A Fraction of What{' '}
+            <br className="hidden sm:block" />
+            Your CPA Charges
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Same rigor. Better technology. 90% less cost. Every review includes a money-back guarantee.
+          <p className="text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+            Same rigor. Better technology. Money-back guarantee.
           </p>
         </motion.div>
 
-        <SavingsAnchor />
+        {/* Price anchoring */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
+          <p className="text-sm text-slate-500 mb-4">
+            What decree holders currently pay:
+          </p>
+          <div className="flex justify-center gap-10">
+            {[
+              { price: '$5,000', label: 'Mid-tier CPA' },
+              { price: '$15,000', label: 'Specialist Firm' },
+              { price: '$30,000+', label: 'Big 4 Advisory' },
+            ].map((item) => (
+              <div key={item.label}>
+                <p className="font-serif text-2xl text-slate-600 line-through decoration-red-500/30">
+                  {item.price}
+                </p>
+                <p className="text-[11px] text-slate-600 mt-1">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Pricing cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] max-w-5xl mx-auto">
           {tiers.map((tier, index) => (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              className={`relative bg-gray-900/50 border rounded-2xl p-8 flex flex-col ${
+              transition={{ delay: index * 0.1 }}
+              className={`relative flex flex-col p-8 ${
                 tier.popular
-                  ? 'border-blue-500/50 glow-strong scale-105'
-                  : 'border-gray-800'
+                  ? 'bg-gold/[0.02]'
+                  : 'bg-navy-900'
               }`}
             >
               {tier.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className={`bg-gradient-to-r ${brand.colors.gradient} text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider`}>
-                    Most Popular
-                  </span>
-                </div>
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gold" />
               )}
 
-              <div className="mb-6">
-                <div className={`inline-flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${tier.gradient} mb-4`}>
-                  <tier.icon className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-1">{tier.name}</h3>
-                <p className="text-sm text-gray-400">{tier.description}</p>
-              </div>
+              <p className={`text-[10px] font-bold uppercase tracking-[0.18em] mb-1 ${
+                tier.popular ? 'text-gold' : 'text-slate-600'
+              }`}>
+                {tier.tier}
+              </p>
+              <h3 className="font-serif text-xl text-slate-100 mb-1">{tier.name}</h3>
+              <p className="text-sm text-slate-400 mb-6">{tier.description}</p>
 
               <div className="mb-6">
-                <span className="text-5xl font-bold text-white">${tier.price}</span>
-                <span className="text-gray-500 ml-2">one-time</span>
+                <span className={`font-serif text-4xl tracking-tight ${
+                  tier.popular ? 'text-gold' : 'text-slate-100'
+                }`}>
+                  ${tier.price.toLocaleString()}
+                </span>
+                <span className="text-slate-600 ml-2 text-sm">one-time</span>
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
+              <ul className="space-y-2.5 mb-8 flex-1">
                 {tier.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
-                    <span className="text-sm text-gray-300">{feature}</span>
+                  <li key={feature} className="flex items-start gap-2 text-sm text-slate-400">
+                    <span className={`mt-1.5 w-1 h-1 rounded-full shrink-0 ${
+                      tier.popular ? 'bg-gold/60' : 'bg-slate-600'
+                    }`} />
+                    {feature}
                   </li>
                 ))}
               </ul>
 
               <a
-                href="/upload"
-                className={`group flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold transition-all ${
+                href="#pricing"
+                className={`group flex items-center justify-center gap-2 w-full py-3.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 ${
                   tier.popular
-                    ? `bg-gradient-to-r ${brand.colors.gradient} text-white hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25`
-                    : 'bg-gray-800 text-white hover:bg-gray-700'
+                    ? 'bg-gold text-navy-900 hover:bg-gold-light hover:shadow-[0_0_40px_rgba(201,169,110,0.15)]'
+                    : 'border border-white/[0.06] text-slate-300 hover:text-slate-100 hover:border-white/[0.12]'
                 }`}
               >
                 {tier.cta}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </motion.div>
           ))}
         </div>
 
-        {/* Captology: Risk reversal — money-back guarantee */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-10 text-sm text-slate-600"
         >
-          <p className="text-sm text-gray-500">
-            100% money-back guarantee if you&apos;re not satisfied with your review.
-            <br />
-            No questions asked. Cancel within 7 days of receiving your report.
-          </p>
-        </motion.div>
+          100% money-back guarantee. No questions asked within 7 days.
+        </motion.p>
       </div>
     </section>
   )

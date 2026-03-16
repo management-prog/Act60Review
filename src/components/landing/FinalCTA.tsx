@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, Shield } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
 
 interface FinalCTAProps {
@@ -10,38 +10,43 @@ interface FinalCTAProps {
 
 export default function FinalCTA({ brand }: FinalCTAProps) {
   return (
-    <section className="relative py-24 bg-gray-950 overflow-hidden">
-      {/* Background glow */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${brand.colors.gradient} opacity-5`} />
+    <section className="relative py-32 bg-navy-900 overflow-hidden noise">
+      <div className="section-line" />
 
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Radial gold glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_50%,rgba(201,169,110,0.06),transparent)]" />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <Shield className="w-12 h-12 text-blue-400 mx-auto mb-6" />
-
-          {/* Captology: Loss aversion final push */}
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            The Cost of Not Knowing<br />Is $287,000
+          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-slate-100 mb-5 tracking-tight leading-[1.1]">
+            The Cost of Not Knowing
+            <br />
+            Is <em className="text-red-400 italic">$287,000</em>
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
-            That&apos;s the average IRS audit deficiency for Act 60 holders. A {brand.priceLabel} review
-            is not an expense — it&apos;s insurance against a six-figure assessment.
+          <p className="text-lg text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
+            That&apos;s the average IRS deficiency for Act 60 holders. A review
+            isn&apos;t an expense &mdash; it&apos;s insurance against a six-figure assessment.
           </p>
 
           <a
-            href="/upload"
-            className={`group inline-flex items-center gap-2 bg-gradient-to-r ${brand.colors.gradient} text-white font-semibold text-lg px-10 py-5 rounded-xl transition-all hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25 glow`}
+            href="#pricing"
+            className="group inline-flex items-center gap-3 bg-gold text-navy-900 font-semibold text-sm px-10 py-5 tracking-wide uppercase transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_60px_rgba(201,169,110,0.2)] glow-gold"
           >
-            {brand.ctaText}
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Get Your Review
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
 
-          <p className="mt-6 text-sm text-gray-600">
-            256-bit encryption • CPA-verified • Money-back guarantee
-          </p>
+          <div className="mt-8 flex items-center justify-center gap-5 text-xs text-slate-500 uppercase tracking-[0.12em]">
+            <span>CPA-Verified</span>
+            <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
+            <span>SOC 2 Compliant</span>
+            <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
+            <span>Money-Back Guarantee</span>
+          </div>
         </motion.div>
       </div>
     </section>

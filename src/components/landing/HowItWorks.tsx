@@ -1,94 +1,93 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Upload, Brain, FileCheck, Shield } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
-
-const steps = [
-  {
-    icon: Upload,
-    number: '01',
-    title: 'Upload Your Return',
-    description: 'Securely upload your PR tax return (Planilla), federal return, and supporting documents. 256-bit encrypted. Deleted after review.',
-    time: '2 minutes',
-  },
-  {
-    icon: Brain,
-    number: '02',
-    title: 'AI Analyzes Everything',
-    description: 'Our AI engine cross-references your return against 200+ Act 60 compliance rules, IRS enforcement patterns, and common CPA errors.',
-    time: '15 minutes',
-  },
-  {
-    icon: FileCheck,
-    number: '03',
-    title: 'CPA Verifies Findings',
-    description: 'A licensed Puerto Rico CPA reviews every finding. No false positives. No generic advice. Every issue includes specific fix instructions.',
-    time: 'Within 24 hours',
-  },
-  {
-    icon: Shield,
-    number: '04',
-    title: 'Get Your Report',
-    description: 'Receive a comprehensive report with your compliance score, prioritized findings, and step-by-step remediation guide.',
-    time: 'Delivered via secure portal',
-  },
-]
 
 interface HowItWorksProps {
   brand: BrandConfig
 }
 
+const steps = [
+  {
+    number: '01',
+    title: 'Upload Your Return',
+    description: 'Securely upload your Planilla, federal return, and supporting docs. 256-bit encrypted.',
+    time: '2 Minutes',
+  },
+  {
+    number: '02',
+    title: 'AI Analyzes Everything',
+    description: 'Cross-references against 200+ compliance rules, IRS patterns, and common CPA errors.',
+    time: '15 Minutes',
+  },
+  {
+    number: '03',
+    title: 'CPA Verifies Findings',
+    description: 'Licensed PR CPA reviews every finding. No false positives. Specific fix instructions.',
+    time: 'Within 24 Hours',
+  },
+  {
+    number: '04',
+    title: 'Get Your Report',
+    description: 'Compliance score, prioritized findings, step-by-step remediation guide.',
+    time: 'Secure Delivery',
+  },
+]
+
 export default function HowItWorks({ brand }: HowItWorksProps) {
   return (
-    <section id="how-it-works" className="relative py-24 bg-gray-950">
-      {/* Subtle gradient divider */}
-      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent`} />
+    <section id="how-it-works" className="relative py-28 bg-navy-900 noise">
+      <div className="section-line" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Subtle gold ambient */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_30%_at_50%_50%,rgba(201,169,110,0.03),transparent)]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-3">
+          <p className="text-gold/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             How It Works
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
             Four Steps to Certainty
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Upload. Analyze. Verify. Done. No phone calls, no billable hours, no waiting weeks for a callback.
+          <p className="text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+            Upload. Analyze. Verify. Done. No phone calls, no billable hours.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
           {steps.map((step, index) => (
             <motion.div
               key={step.number}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              className="relative"
+              transition={{ delay: index * 0.12 }}
+              className="relative px-6 lg:px-8 py-8 text-center lg:text-left"
             >
-              {/* Connector line */}
+              {/* Vertical divider between steps */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-[calc(100%_-_16px)] w-[calc(100%_-_32px)] h-px bg-gradient-to-r from-gray-700 to-gray-800" />
+                <div className="hidden lg:block absolute top-6 right-0 w-px h-16 bg-gradient-to-b from-white/[0.06] to-transparent" />
               )}
 
-              <div className="bg-gray-900/30 border border-gray-800/50 rounded-2xl p-6 h-full hover:border-blue-900/30 transition-all">
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${brand.colors.gradient} mb-4`}>
-                  <step.icon className="w-6 h-6 text-white" />
-                </div>
-                <p className="text-xs font-mono text-gray-600 mb-2">STEP {step.number}</p>
-                <h3 className="text-lg font-semibold text-white mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed mb-3">
-                  {step.description}
-                </p>
-                <p className="text-xs text-blue-400 font-medium">{step.time}</p>
-              </div>
+              {/* Step number */}
+              <p className="font-serif text-5xl text-gold/[0.08] mb-4">{step.number}</p>
+
+              <h3 className="font-sans text-base font-semibold text-slate-100 mb-2 tracking-tight">
+                {step.title}
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed mb-4">
+                {step.description}
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-gold/70 font-semibold tracking-[0.08em] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold/40" />
+                {step.time}
+              </span>
             </motion.div>
           ))}
         </div>

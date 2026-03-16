@@ -1,101 +1,164 @@
 'use client'
 
+import { useRef, useEffect, useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { AlertTriangle, FileWarning, Scale, DollarSign, Search, Users } from 'lucide-react'
 
-// Captology: Credibility through specificity + loss aversion
 const threats = [
   {
-    icon: Search,
     stat: '100+',
-    label: 'Active IRS Investigations',
-    description: 'The IRS has over 100 Act 60 holders under active investigation. Campaign 685 specifically targets Puerto Rico tax incentive abuse.',
-    source: 'GAO Report GAO-26-107225, December 2025',
+    label: 'Active Investigations',
+    description: 'Campaign 685 specifically targets Puerto Rico tax incentive abuse.',
+    source: 'GAO Report GAO-26-107225',
+    color: 'text-red-400',
   },
   {
-    icon: DollarSign,
     stat: '$287K',
-    label: 'Average Audit Deficiency',
-    description: 'When the IRS finds errors in Act 60 returns, the average assessment is $287,000 — not including penalties and interest.',
+    label: 'Average Deficiency',
+    description: 'Average IRS assessment — not including penalties and interest.',
     source: 'IRS SBSE Division Data, 2025',
+    color: 'text-red-400',
   },
   {
-    icon: FileWarning,
     stat: '40%',
-    label: 'Transfer Pricing Penalty',
-    description: 'Gross valuation misstatements on transfer pricing trigger a 40% penalty. Puerto Rico\'s 51% disallowance rule compounds the risk.',
-    source: 'IRC §6662(h), PR Code §1033.17',
+    label: 'TP Penalty Rate',
+    description: 'Gross valuation misstatements trigger a 40% penalty under IRC \u00A76662(h).',
+    source: 'IRC \u00A76662(h), PR Code \u00A71033.17',
+    color: 'text-red-400',
   },
   {
-    icon: Scale,
     stat: '$2.3B',
-    label: 'Total Exempt Income',
-    description: 'Act 60 holders claimed $2.3 billion in exempt income. This concentrated wealth makes every return a high-value audit target.',
+    label: 'Exempt Income',
+    description: 'Total claimed by decree holders — every return is a high-value audit target.',
     source: 'DDEC Performance Evaluation, 2024',
+    color: 'text-slate-300',
   },
   {
-    icon: Users,
     stat: '85%',
-    label: 'Holders Report CPA Issues',
-    description: 'Community surveys show widespread CPA dissatisfaction — missed deadlines, vague advice, overlooked FBAR filings, and overcharging.',
-    source: 'Act 60 Community Forum Research',
+    label: 'CPA Dissatisfaction',
+    description: 'Missed deadlines, vague advice, overlooked FBAR filings, overcharging.',
+    source: 'Community Forum Research',
+    color: 'text-slate-300',
   },
   {
-    icon: AlertTriangle,
     stat: '0',
-    label: 'AI Tools Serving This Market',
-    description: 'There are zero AI-powered tax review tools for Puerto Rico. Your CPA is your only line of defense. Now there\'s an alternative.',
-    source: 'SimilarWeb Market Analysis, March 2026',
+    label: 'AI Tools Available',
+    description: 'Zero AI-powered review tools for PR. Your CPA is your only defense. Until now.',
+    source: 'SimilarWeb, March 2026',
+    color: 'text-gold',
   },
 ]
 
+function AnimatedNumber({ value, suffix = '' }: { value: string; suffix?: string }) {
+  const [display, setDisplay] = useState(value)
+  const ref = useRef<HTMLDivElement>(null)
+  const hasAnimated = useRef(false)
+
+  const animate = useCallback(() => {
+    if (hasAnimated.current) return
+    hasAnimated.current = true
+
+    const numericPart = value.replace(/[^0-9.]/g, '')
+    const prefix = value.replace(/[0-9.+]/g, '')
+    const target = parseFloat(numericPart)
+
+    if (isNaN(target)) {
+      setDisplay(value)
+      return
+    }
+
+    const duration = 1500
+    const start = performance.now()
+
+    function step(now: number) {
+      const elapsed = now - start
+      const progress = Math.min(elapsed / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      const current = Math.round(eased * target)
+
+      if (value.includes('K')) {
+        setDisplay(`${prefix}${current}K`)
+      } else if (value.includes('B')) {
+        setDisplay(`${prefix}${(eased * target).toFixed(1)}B`)
+      } else {
+        setDisplay(`${prefix}${current}${suffix}`)
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(step)
+      } else {
+        setDisplay(value)
+      }
+    }
+
+    requestAnimationFrame(step)
+  }, [value, suffix])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          animate()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    const el = ref.current
+    if (el) observer.observe(el)
+    return () => { if (el) observer.unobserve(el) }
+  }, [animate])
+
+  return <div ref={ref}>{display}</div>
+}
+
 export default function ThreatSection() {
   return (
-    <section className="relative py-24 bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header — Captology: fear appeal framing */}
+    <section className="relative py-28 bg-navy-800/50 noise">
+      <div className="section-line" />
+
+      {/* Red ambient glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(239,68,68,0.04),transparent)]" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-red-400 font-semibold text-sm uppercase tracking-widest mb-3">
+          <p className="text-red-400/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             The Enforcement Landscape
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
             The IRS Is Not Bluffing
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Every data point below is sourced from government reports. This is not speculation — it&apos;s the reality Act 60 holders face today.
+          <p className="text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+            Every number below is from government reports. This is the reality Act 60 holders face today.
           </p>
         </motion.div>
 
-        {/* Threat grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Threat grid — editorial style */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04]">
           {threats.map((threat, index) => (
             <motion.div
               key={threat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:border-red-900/50 transition-all"
+              transition={{ delay: index * 0.08 }}
+              className="bg-navy-900 p-8 hover:bg-white/[0.01] transition-colors duration-300"
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="p-2 bg-red-950/50 rounded-lg">
-                  <threat.icon className="w-5 h-5 text-red-400" />
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-white">{threat.stat}</p>
-                  <p className="text-sm font-semibold text-red-400">{threat.label}</p>
-                </div>
+              <div className={`font-serif text-4xl tracking-tight mb-1 ${threat.color}`}>
+                <AnimatedNumber value={threat.stat} />
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed mb-3">
+              <p className="text-xs font-semibold text-red-400/70 uppercase tracking-[0.1em] mb-3">
+                {threat.label}
+              </p>
+              <p className="text-sm text-slate-400 leading-relaxed mb-3">
                 {threat.description}
               </p>
-              <p className="text-xs text-gray-600 italic">
-                Source: {threat.source}
+              <p className="text-[11px] text-slate-600">
+                {threat.source}
               </p>
             </motion.div>
           ))}

@@ -1,6 +1,5 @@
 'use client'
 
-import { Shield } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
 
 interface FooterProps {
@@ -9,54 +8,72 @@ interface FooterProps {
 
 export default function Footer({ brand }: FooterProps) {
   return (
-    <footer className="bg-gray-950 border-t border-gray-800/50 py-12">
+    <footer className="bg-navy-950 border-t border-white/[0.04] py-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <Shield className="w-5 h-5 text-blue-400" />
-              <span className="text-lg font-bold text-white">{brand.name}</span>
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-0.5 mb-4">
+              <span className="font-serif text-base text-slate-200">Act 60 </span>
+              <span className="font-serif text-base text-gold font-semibold">Review</span>
             </div>
-            <p className="text-sm text-gray-500 max-w-md mb-4">
-              AI-powered tax return review for Puerto Rico Act 60 decree holders.
-              Operated by Tesseract LLC.
+            <p className="text-sm text-slate-500 leading-relaxed mb-4">
+              AI-powered tax return review for Puerto Rico Act 60 decree holders. Operated by Tesseract LLC.
             </p>
-            <p className="text-xs text-gray-600">
-              This service is not a substitute for professional advice from a licensed CPA or tax attorney.
-              AI-generated analysis is for informational and educational purposes only and does not
-              constitute tax preparation, tax advice, or representation before the IRS or PR Hacienda.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Not a substitute for professional CPA or attorney advice. For informational purposes only.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Product links */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
-            <ul className="space-y-2">
-              <li><a href="#how-it-works" className="text-sm text-gray-500 hover:text-white transition-colors">How It Works</a></li>
-              <li><a href="#pricing" className="text-sm text-gray-500 hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#faq" className="text-sm text-gray-500 hover:text-white transition-colors">FAQ</a></li>
-              <li><a href="/upload" className="text-sm text-gray-500 hover:text-white transition-colors">Start Review</a></li>
+            <h4 className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.18em] mb-4">
+              Product
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { href: '#how-it-works', label: 'How It Works' },
+                { href: '#pricing', label: 'Pricing' },
+                { href: '#faq', label: 'FAQ' },
+                { href: '#pricing', label: 'Start Review' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-sm text-slate-600 hover:text-slate-300 transition-colors duration-200">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Legal links */}
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Legal</h4>
-            <ul className="space-y-2">
-              <li><a href="/privacy" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="/disclaimer" className="text-sm text-gray-500 hover:text-white transition-colors">Disclaimer</a></li>
+            <h4 className="text-[11px] font-semibold text-slate-500 uppercase tracking-[0.18em] mb-4">
+              Legal
+            </h4>
+            <ul className="space-y-2.5">
+              {[
+                { href: '/privacy', label: 'Privacy Policy' },
+                { href: '/terms', label: 'Terms of Service' },
+                { href: '/disclaimer', label: 'Disclaimer' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-sm text-slate-600 hover:text-slate-300 transition-colors duration-200">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-800/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-600">
-            &copy; {new Date().getFullYear()} Tesseract LLC. All rights reserved.
+        <div className="mt-10 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-slate-700">
+            &copy; {new Date().getFullYear()} Tesseract LLC
           </p>
           <div className="flex items-center gap-4">
-            {brand.trustBadges.map((badge) => (
-              <span key={badge} className="text-xs text-gray-600 border border-gray-800 rounded-full px-3 py-1">
+            {['CPA-Verified', 'SOC 2', '256-bit Encryption'].map((badge) => (
+              <span key={badge} className="text-[10px] text-slate-600 uppercase tracking-[0.08em]">
                 {badge}
               </span>
             ))}
