@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import Stripe from 'stripe'
+import { sendReport, getFromEmail } from '@/lib/email'
+import { getBrandFromId } from '@/config/brands'
 
 export const maxDuration = 120
 
@@ -156,12 +158,14 @@ export async function POST(request: NextRequest) {
 
     // Verify Stripe payment if session ID provided
     let verifiedTier = 'basic'
+    let customerEmail: string | null = null
     if (sessionId) {
       try {
         const stripe = getStripe()
         const session = await stripe.checkout.sessions.retrieve(sessionId)
         if (session.payment_status === 'paid') {
           verifiedTier = (session.metadata?.tier as string) ?? tier ?? 'basic'
+          customerEmail = session.customer_email ?? session.customer_details?.email ?? null
         } else {
           return Response.json({ error: 'Payment not completed' }, { status: 402 })
         }
@@ -171,6 +175,9 @@ export async function POST(request: NextRequest) {
     } else if (tier) {
       verifiedTier = tier
     }
+
+    const brandId = request.headers.get('x-brand-id') ?? 'act60review'
+    const brand = getBrandFromId(brandId)
 
     const tierInstructions = TIER_INSTRUCTIONS[verifiedTier] ?? TIER_INSTRUCTIONS.basic
 
@@ -224,14 +231,30 @@ export async function POST(request: NextRequest) {
 
     const encoder = new TextEncoder()
 
+    let fullReportText = ''
+
     const readable = new ReadableStream({
       async start(controller) {
         try {
           stream.on('text', (text) => {
+            fullReportText += text
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ type: 'delta', text })}\n\n`))
           })
 
           const finalMessage = await stream.finalMessage()
+
+          // Send report via email in background (don't block the stream)
+          if (customerEmail && process.env.RESEND_API_KEY) {
+            const tierConfig = brand.tiers.find((t) => t.id === verifiedTier)
+            sendReport({
+              to: customerEmail,
+              brandName: brand.name,
+              brandDomain: brand.domain,
+              tierName: tierConfig?.name ?? verifiedTier,
+              reportHtml: fullReportText.replace(/\n/g, '<br>'),
+              fromEmail: getFromEmail(brandId),
+            }).catch((err) => console.error('Email send failed:', err))
+          }
 
           controller.enqueue(
             encoder.encode(
