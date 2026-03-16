@@ -1,13 +1,14 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Upload, FileText, X, Shield, ArrowRight, Loader2, CheckCircle } from 'lucide-react'
+import { Upload, FileText, X, Shield, ArrowRight, Loader2, CheckCircle, Lock } from 'lucide-react'
 import { getBrandConfig } from '@/config/brands'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
-type UploadState = 'idle' | 'uploading' | 'analyzing' | 'complete' | 'error'
+type UploadState = 'idle' | 'uploading' | 'analyzing' | 'complete' | 'error' | 'no-access'
 
 interface UploadedFile {
   file: File
@@ -27,6 +28,9 @@ const fileLabels: Record<string, string> = {
 
 export default function UploadPage() {
   const brand = getBrandConfig()
+  const searchParams = useSearchParams()
+  const sessionId = searchParams.get('session_id')
+  const tier = searchParams.get('tier') ?? 'basic'
   const [files, setFiles] = useState<UploadedFile[]>([])
   const [state, setState] = useState<UploadState>('idle')
   const [dragOver, setDragOver] = useState(false)
@@ -83,6 +87,8 @@ export default function UploadPage() {
         formData.append('labels', f.label)
       })
       formData.append('brandId', brand.id)
+      if (sessionId) formData.append('sessionId', sessionId)
+      formData.append('tier', tier)
 
       setState('analyzing')
 
