@@ -15,7 +15,7 @@ const schemaData = {
   },
   provider: {
     '@type': 'Organization',
-    name: 'Tesseract LLC',
+    name: 'Dis Optimus Capital LLC',
     address: {
       '@type': 'PostalAddress',
       addressRegion: 'PR',

@@ -18,7 +18,7 @@ export default function Footer({ brand }: FooterProps) {
               <span className="font-serif text-base text-gold font-semibold">Review</span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed mb-4">
-              AI-powered tax return review for Puerto Rico Act 60 decree holders. Operated by Tesseract LLC.
+              AI-powered tax return review for Puerto Rico Act 60 decree holders. Operated by Dis Optimus Capital LLC.
             </p>
             <p className="text-xs text-slate-600 leading-relaxed">
               Not a substitute for professional CPA or attorney advice. For informational purposes only.
@@ -69,7 +69,7 @@ export default function Footer({ brand }: FooterProps) {
 
         <div className="mt-10 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-700">
-            &copy; {new Date().getFullYear()} Tesseract LLC
+            &copy; {new Date().getFullYear()} Dis Optimus Capital LLC
           </p>
           <div className="flex items-center gap-4">
             {['CPA-Verified', 'SOC 2', '256-bit Encryption'].map((badge) => (

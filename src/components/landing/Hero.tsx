@@ -78,6 +78,9 @@ export default function Hero({ brand }: HeroProps) {
         }}
       />
 
+      {/* Spacer for fixed navbar */}
+      <div className="h-[72px] shrink-0" />
+
       {/* Threat ticker */}
       <div className="relative z-10 border-b border-red-900/20 bg-red-950/10 backdrop-blur-sm py-2.5">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
