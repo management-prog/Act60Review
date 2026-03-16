@@ -59,7 +59,7 @@ export default function WhatWeCatch() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-gold/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
+          <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             What We Catch
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">

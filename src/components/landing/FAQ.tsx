@@ -45,7 +45,7 @@ export default function FAQ() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-gold/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
+          <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             FAQ
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 tracking-tight">
@@ -67,12 +67,12 @@ export default function FAQ() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex items-center justify-between py-5 text-left group"
               >
-                <span className="text-slate-200 font-medium text-[15px] pr-4 group-hover:text-gold transition-colors duration-200">
+                <span className="text-slate-200 font-medium text-[15px] pr-4 group-hover:text-accent transition-colors duration-200">
                   {faq.question}
                 </span>
                 <Plus
                   className={`w-4 h-4 text-slate-600 shrink-0 transition-all duration-300 ${
-                    openIndex === index ? 'rotate-45 text-gold' : ''
+                    openIndex === index ? 'rotate-45 text-accent' : ''
                   }`}
                 />
               </button>

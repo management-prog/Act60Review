@@ -279,7 +279,7 @@ export default function UploadPage() {
                 <button
                   onClick={handleSubmit}
                   disabled={files.length === 0 || state === 'uploading' || state === 'analyzing'}
-                  className={`group flex items-center gap-2 bg-gradient-to-r ${brand.colors.gradient} text-white font-semibold text-lg px-8 py-4 rounded-xl transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 glow`}
+                  className="group flex items-center gap-2 bg-accent text-navy-900 font-semibold text-lg px-8 py-4 rounded-xl transition-all hover:scale-105 hover:bg-accent-light disabled:opacity-50 disabled:hover:scale-100"
                 >
                   {state === 'uploading' || state === 'analyzing' ? (
                     <>

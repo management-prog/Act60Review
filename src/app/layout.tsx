@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
-import { getBrandConfig } from '@/config/brands'
+import { getBrandFromHeaders } from '@/config/brands.server'
 import { JsonLd } from '@/components/json-ld'
 import './globals.css'
 
@@ -16,8 +16,8 @@ const playfair = Playfair_Display({
   style: ['normal', 'italic'],
 })
 
-export function generateMetadata(): Metadata {
-  const brand = getBrandConfig()
+export async function generateMetadata(): Promise<Metadata> {
+  const brand = await getBrandFromHeaders()
   return {
     title: `${brand.name} | ${brand.tagline}`,
     description: brand.description,
@@ -33,20 +33,18 @@ export function generateMetadata(): Metadata {
       title: `${brand.name} | ${brand.tagline}`,
       description: brand.description,
     },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    robots: { index: true, follow: true },
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const brand = await getBrandFromHeaders()
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" data-brand={brand.id}>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-navy-900 text-slate-100`}>
         <JsonLd />
         {children}

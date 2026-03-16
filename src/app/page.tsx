@@ -1,6 +1,4 @@
-'use client'
-
-import { getBrandConfig } from '@/config/brands'
+import { getBrandFromHeaders } from '@/config/brands.server'
 import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/landing/Hero'
 import ThreatSection from '@/components/landing/ThreatSection'
@@ -11,8 +9,8 @@ import FAQ from '@/components/landing/FAQ'
 import FinalCTA from '@/components/landing/FinalCTA'
 import Footer from '@/components/layout/Footer'
 
-export default function Home() {
-  const brand = getBrandConfig()
+export default async function Home() {
+  const brand = await getBrandFromHeaders()
 
   return (
     <>

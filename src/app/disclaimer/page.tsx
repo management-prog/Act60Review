@@ -10,7 +10,7 @@ export default function DisclaimerPage() {
   return (
     <main className="min-h-screen bg-navy-900 pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-gold/60 text-sm hover:text-gold transition-colors mb-8 inline-block">&larr; Back to Home</Link>
+        <Link href="/" className="text-accent/60 text-sm hover:text-accent transition-colors mb-8 inline-block">&larr; Back to Home</Link>
 
         <h1 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-4 tracking-tight">Disclaimer</h1>
         <p className="text-sm text-slate-500 mb-12">Last updated: March 16, 2026</p>
@@ -77,7 +77,7 @@ export default function DisclaimerPage() {
 
           <section>
             <h2 className="font-serif text-xl text-slate-200 mb-3">Regulatory Compliance</h2>
-            <p>The Service operates in compliance with applicable Puerto Rico and federal regulations. The Company is registered in Puerto Rico and operates under the laws of the Commonwealth of Puerto Rico. For the full terms governing your use of the Service, please review our <Link href="/terms" className="text-gold hover:text-gold-light transition-colors">Terms of Service</Link> and <Link href="/privacy" className="text-gold hover:text-gold-light transition-colors">Privacy Policy</Link>.</p>
+            <p>The Service operates in compliance with applicable Puerto Rico and federal regulations. The Company is registered in Puerto Rico and operates under the laws of the Commonwealth of Puerto Rico. For the full terms governing your use of the Service, please review our <Link href="/terms" className="text-accent hover:text-accent-light transition-colors">Terms of Service</Link> and <Link href="/privacy" className="text-accent hover:text-accent-light transition-colors">Privacy Policy</Link>.</p>
           </section>
 
           <section>

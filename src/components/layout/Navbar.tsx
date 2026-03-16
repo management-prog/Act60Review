@@ -41,10 +41,10 @@ export default function Navbar({ brand }: NavbarProps) {
           {/* Logo */}
           <a href="/" className="flex items-center gap-0.5 group">
             <span className="font-serif text-lg text-slate-100 tracking-tight">
-              Act 60{' '}
+              {brand.logoName[0]}
             </span>
-            <span className="font-serif text-lg text-gold font-semibold tracking-tight">
-              Review
+            <span className="font-serif text-lg text-accent font-semibold tracking-tight">
+              {brand.logoName[1]}
             </span>
           </a>
 
@@ -62,7 +62,7 @@ export default function Navbar({ brand }: NavbarProps) {
             <div className="w-px h-4 bg-white/[0.06] mx-3" />
             <a
               href="#pricing"
-              className="group inline-flex items-center gap-2 text-gold text-[13px] font-semibold tracking-[0.08em] uppercase border border-gold/25 px-5 py-2.5 hover:bg-gold/[0.06] hover:border-gold/40 transition-all duration-300"
+              className="group inline-flex items-center gap-2 text-accent text-[13px] font-semibold tracking-[0.08em] uppercase border border-accent/25 px-5 py-2.5 hover:bg-accent/[0.06] hover:border-accent/40 transition-all duration-300"
             >
               Start Review
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -103,7 +103,7 @@ export default function Navbar({ brand }: NavbarProps) {
                   <a
                     href="#pricing"
                     onClick={() => setMobileOpen(false)}
-                    className="block text-center bg-gold text-navy-900 font-semibold text-sm px-5 py-3 tracking-wide uppercase"
+                    className="block text-center bg-accent text-navy-900 font-semibold text-sm px-5 py-3 tracking-wide uppercase"
                   >
                     Start Review
                   </a>

@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen bg-navy-900 pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-gold/60 text-sm hover:text-gold transition-colors mb-8 inline-block">&larr; Back to Home</Link>
+        <Link href="/" className="text-accent/60 text-sm hover:text-accent transition-colors mb-8 inline-block">&larr; Back to Home</Link>
 
         <h1 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-4 tracking-tight">Terms of Service</h1>
         <p className="text-sm text-slate-500 mb-12">Last updated: March 16, 2026</p>
@@ -77,7 +77,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="font-serif text-xl text-slate-200 mb-3">12. Data Handling</h2>
-            <p>Your use of the Service is also governed by our <Link href="/privacy" className="text-gold hover:text-gold-light transition-colors">Privacy Policy</Link>, which is incorporated into these Terms by reference. By using the Service, you consent to the collection and use of your information as described in the Privacy Policy.</p>
+            <p>Your use of the Service is also governed by our <Link href="/privacy" className="text-accent hover:text-accent-light transition-colors">Privacy Policy</Link>, which is incorporated into these Terms by reference. By using the Service, you consent to the collection and use of your information as described in the Privacy Policy.</p>
           </section>
 
           <section>

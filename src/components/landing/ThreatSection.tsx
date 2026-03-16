@@ -44,7 +44,7 @@ const threats = [
     label: 'AI Tools Available',
     description: 'Zero AI-powered review tools for PR. Your CPA is your only defense. Until now.',
     source: 'SimilarWeb, March 2026',
-    color: 'text-gold',
+    color: 'text-accent',
   },
 ]
 

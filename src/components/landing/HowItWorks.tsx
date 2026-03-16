@@ -49,7 +49,7 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-gold/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
+          <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             How It Works
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
@@ -76,7 +76,7 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
               )}
 
               {/* Step number */}
-              <p className="font-serif text-5xl text-gold/[0.08] mb-4">{step.number}</p>
+              <p className="font-serif text-5xl text-accent/[0.08] mb-4">{step.number}</p>
 
               <h3 className="font-sans text-base font-semibold text-slate-100 mb-2 tracking-tight">
                 {step.title}
@@ -84,8 +84,8 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
               <p className="text-sm text-slate-400 leading-relaxed mb-4">
                 {step.description}
               </p>
-              <span className="inline-flex items-center gap-1.5 text-[11px] text-gold/70 font-semibold tracking-[0.08em] uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-gold/40" />
+              <span className="inline-flex items-center gap-1.5 text-[11px] text-accent/70 font-semibold tracking-[0.08em] uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent/40" />
                 {step.time}
               </span>
             </motion.div>

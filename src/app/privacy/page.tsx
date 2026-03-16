@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-navy-900 pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="text-gold/60 text-sm hover:text-gold transition-colors mb-8 inline-block">&larr; Back to Home</Link>
+        <Link href="/" className="text-accent/60 text-sm hover:text-accent transition-colors mb-8 inline-block">&larr; Back to Home</Link>
 
         <h1 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-4 tracking-tight">Privacy Policy</h1>
         <p className="text-sm text-slate-500 mb-12">Last updated: March 16, 2026</p>
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
             <p>We do not sell, rent, or trade your personal information. We share information only with:</p>
             <ul className="list-disc list-inside space-y-1 ml-2 mt-2">
               <li><span className="text-slate-300">CPA reviewers:</span> Licensed Puerto Rico CPAs who verify AI-generated findings as part of the Service</li>
-              <li><span className="text-slate-300">Payment processor:</span> Stripe, Inc. processes your payment (subject to <a href="https://stripe.com/privacy" className="text-gold hover:text-gold-light transition-colors" target="_blank" rel="noopener noreferrer">Stripe&apos;s Privacy Policy</a>)</li>
+              <li><span className="text-slate-300">Payment processor:</span> Stripe, Inc. processes your payment (subject to <a href="https://stripe.com/privacy" className="text-accent hover:text-accent-light transition-colors" target="_blank" rel="noopener noreferrer">Stripe&apos;s Privacy Policy</a>)</li>
               <li><span className="text-slate-300">Legal compliance:</span> When required by law, subpoena, court order, or government request</li>
               <li><span className="text-slate-300">Business transfer:</span> In connection with a merger, acquisition, or sale of assets, with prior notice to you</li>
             </ul>

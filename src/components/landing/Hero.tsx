@@ -110,7 +110,7 @@ export default function Hero({ brand }: HeroProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-gold font-sans text-xs font-semibold uppercase tracking-[0.25em] mb-8"
+            className="text-accent font-sans text-xs font-semibold uppercase tracking-[0.25em] mb-8"
           >
             AI-Powered Compliance Review
           </motion.p>
@@ -122,8 +122,8 @@ export default function Hero({ brand }: HeroProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.08] mb-8 text-slate-100"
           >
-            Is Your Act 60 Return{' '}
-            <em className="text-gold italic">Bulletproof?</em>
+            {brand.heroHeadline}{' '}
+            <em className="text-accent italic">{brand.heroHighlight}</em>
           </motion.h1>
 
           {/* Subheadline */}
@@ -133,7 +133,7 @@ export default function Hero({ brand }: HeroProps) {
             transition={{ duration: 0.7, delay: 0.35 }}
             className="text-lg sm:text-xl text-slate-400 max-w-xl leading-relaxed mb-10"
           >
-            The IRS is investigating 100+ decree holders. Our AI reviews your return against 200+ compliance rules in under 24 hours — catching the errors that trigger audits.
+            {brand.heroSubheadline}
           </motion.p>
 
           {/* CTA */}
@@ -145,16 +145,16 @@ export default function Hero({ brand }: HeroProps) {
           >
             <a
               href="#pricing"
-              className="group inline-flex items-center gap-3 bg-gold text-navy-900 font-semibold text-sm px-8 py-4 tracking-wide uppercase transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_50px_rgba(201,169,110,0.2)]"
+              className="group inline-flex items-center gap-3 bg-accent text-navy-900 font-semibold text-sm px-8 py-4 tracking-wide uppercase transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_50px_rgba(201,169,110,0.2)]"
             >
-              Get Your Review
+              {brand.ctaText}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="#how-it-works"
               className="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 font-medium text-sm px-6 py-4 border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
             >
-              See What We Catch
+              {brand.ctaSecondary}
             </a>
           </motion.div>
 
@@ -189,7 +189,7 @@ export default function Hero({ brand }: HeroProps) {
           <motion.div
             animate={{ opacity: [0.3, 0.8, 0.3] }}
             transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
-            className="w-0.5 h-1.5 rounded-full bg-gold/50"
+            className="w-0.5 h-1.5 rounded-full bg-accent/50"
           />
         </motion.div>
       </motion.div>

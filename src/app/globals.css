@@ -10,26 +10,20 @@
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 
-  /* Gold palette */
-  --color-gold: #C9A96E;
-  --color-gold-light: #DFC292;
-  --color-gold-dark: #A68B4B;
-  --color-gold-50: #fdf8ef;
-  --color-gold-100: #f8ebce;
-  --color-gold-200: #f0d79c;
-  --color-gold-300: #e4be68;
-  --color-gold-400: #C9A96E;
-  --color-gold-500: #b8923a;
-  --color-gold-600: #a07a2e;
-  --color-gold-700: #8a6527;
-  --color-gold-800: #715024;
-  --color-gold-900: #5c4120;
+  /* Accent color system — overridden per brand via [data-brand] */
+  --color-accent: var(--brand-accent, #C9A96E);
+  --color-accent-light: var(--brand-accent-light, #DFC292);
+  --color-accent-dark: var(--brand-accent-dark, #A68B4B);
 
-  /* Navy palette */
-  --color-navy: #0A0F1E;
-  --color-navy-950: #050a18;
-  --color-navy-900: #0A0F1E;
-  --color-navy-800: #111827;
+  /* Keep gold as alias for backwards compat */
+  --color-gold: var(--brand-accent, #C9A96E);
+  --color-gold-light: var(--brand-accent-light, #DFC292);
+
+  /* Navy palette — overridden per brand */
+  --color-navy: var(--brand-bg, #0A0F1E);
+  --color-navy-950: var(--brand-bg-deep, #050a18);
+  --color-navy-900: var(--brand-bg, #0A0F1E);
+  --color-navy-800: var(--brand-bg-surface, #111827);
   --color-navy-700: #1E293B;
   --color-navy-600: #334155;
 
@@ -112,11 +106,11 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.glass-gold {
-  background: rgba(201, 169, 110, 0.03);
+.glass-accent {
+  background: color-mix(in srgb, var(--color-accent) 3%, transparent);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(201, 169, 110, 0.08);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 8%, transparent);
 }
 
 .glass-strong {
@@ -127,12 +121,12 @@ html {
 }
 
 /* Glow effects */
-.glow-gold {
-  box-shadow: 0 0 60px rgba(201, 169, 110, 0.15), 0 0 120px rgba(201, 169, 110, 0.08);
+.glow-accent {
+  box-shadow: 0 0 60px color-mix(in srgb, var(--color-accent) 15%, transparent), 0 0 120px color-mix(in srgb, var(--color-accent) 8%, transparent);
 }
 
-.glow-gold-strong {
-  box-shadow: 0 0 80px rgba(201, 169, 110, 0.2), 0 0 160px rgba(201, 169, 110, 0.1);
+.glow-accent-strong {
+  box-shadow: 0 0 80px color-mix(in srgb, var(--color-accent) 20%, transparent), 0 0 160px color-mix(in srgb, var(--color-accent) 10%, transparent);
 }
 
 .glow-red {
@@ -140,17 +134,17 @@ html {
 }
 
 /* Gradient border utility */
-.gradient-border-gold {
+.gradient-border-accent {
   position: relative;
 }
 
-.gradient-border-gold::before {
+.gradient-border-accent::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(201, 169, 110, 0.3), rgba(201, 169, 110, 0.05), transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 30%, transparent), color-mix(in srgb, var(--color-accent) 5%, transparent), transparent);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -214,7 +208,35 @@ html {
   transform: translateX(-50%);
   width: 1px;
   height: 48px;
-  background: linear-gradient(180deg, transparent, rgba(201, 169, 110, 0.15), transparent);
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-accent) 15%, transparent), transparent);
+}
+
+/* Brand-specific color overrides */
+[data-brand="act60review"] {
+  --brand-accent: #C9A96E;
+  --brand-accent-light: #DFC292;
+  --brand-accent-dark: #A68B4B;
+  --brand-bg: #0A0F1E;
+  --brand-bg-deep: #050a18;
+  --brand-bg-surface: #111827;
+}
+
+[data-brand="decreecheck"] {
+  --brand-accent: #10B981;
+  --brand-accent-light: #34D399;
+  --brand-accent-dark: #059669;
+  --brand-bg: #0A1A15;
+  --brand-bg-deep: #050F0C;
+  --brand-bg-surface: #0F2318;
+}
+
+[data-brand="act60shield"] {
+  --brand-accent: #8B5CF6;
+  --brand-accent-light: #A78BFA;
+  --brand-accent-dark: #7C3AED;
+  --brand-bg: #0F0D1E;
+  --brand-bg-deep: #08071A;
+  --brand-bg-surface: #1A1730;
 }
 
 :root {

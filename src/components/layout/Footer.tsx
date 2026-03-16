@@ -14,8 +14,8 @@ export default function Footer({ brand }: FooterProps) {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-0.5 mb-4">
-              <span className="font-serif text-base text-slate-200">Act 60 </span>
-              <span className="font-serif text-base text-gold font-semibold">Review</span>
+              <span className="font-serif text-base text-slate-200">{brand.logoName[0]}</span>
+              <span className="font-serif text-base text-accent font-semibold">{brand.logoName[1]}</span>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed mb-4">
               AI-powered tax return review for Puerto Rico Act 60 decree holders. Operated by Dis Optimus Capital LLC.

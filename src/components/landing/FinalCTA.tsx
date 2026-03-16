@@ -34,9 +34,9 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
 
           <a
             href="#pricing"
-            className="group inline-flex items-center gap-3 bg-gold text-navy-900 font-semibold text-sm px-10 py-5 tracking-wide uppercase transition-all duration-300 hover:bg-gold-light hover:shadow-[0_0_60px_rgba(201,169,110,0.2)] glow-gold"
+            className="group inline-flex items-center gap-3 bg-accent text-navy-900 font-semibold text-sm px-10 py-5 tracking-wide uppercase transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_60px_rgba(201,169,110,0.2)] glow-accent"
           >
-            Get Your Review
+            {brand.ctaText}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
 
