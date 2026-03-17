@@ -30,7 +30,7 @@ ${brand.name} is an AI-powered tax return review service for Puerto Rico Act 60 
 ${slugs.slice(0, 30).map((s) => `- ${base}/${s}`).join('\n')}
 
 ## Contact
-- Email: support@act60review.com
+- Email: support@${brand.domain}
 - Entity: Dis Optimus Capital LLC, San Juan, Puerto Rico
 `
 

@@ -1,12 +1,17 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getBrandFromHeaders } from '@/config/brands.server'
 
-export const metadata: Metadata = {
-  title: 'Disclaimer | Act 60 Review',
-  description: 'Legal disclaimer for Act 60 Review, operated by Dis Optimus Capital LLC.',
+export async function generateMetadata() {
+  const brand = await getBrandFromHeaders()
+  return {
+    title: `Disclaimer | ${brand.name}`,
+    description: `Legal disclaimer for ${brand.name}, operated by Dis Optimus Capital LLC.`,
+  }
 }
 
-export default function DisclaimerPage() {
+export default async function DisclaimerPage() {
+  const brand = await getBrandFromHeaders()
+  const supportEmail = `support@${brand.domain}`
   return (
     <main className="min-h-screen bg-navy-900 pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +23,7 @@ export default function DisclaimerPage() {
         <div className="space-y-8 text-slate-400 text-[15px] leading-relaxed">
           <section>
             <h2 className="font-serif text-xl text-slate-200 mb-3">Important Notice</h2>
-            <p className="text-slate-300 font-semibold">Please read this disclaimer carefully before using the Act 60 Review service. By using this Service, you acknowledge that you have read, understood, and agree to the following terms.</p>
+            <p className="text-slate-300 font-semibold">Please read this disclaimer carefully before using the {brand.name} service. By using this Service, you acknowledge that you have read, understood, and agree to the following terms.</p>
           </section>
 
           <section>
@@ -86,7 +91,7 @@ export default function DisclaimerPage() {
             <p className="mt-2 text-slate-300">
               Dis Optimus Capital LLC<br />
               San Juan, Puerto Rico<br />
-              support@act60review.com
+              {supportEmail}
             </p>
           </section>
         </div>

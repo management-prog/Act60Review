@@ -1,12 +1,17 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getBrandFromHeaders } from '@/config/brands.server'
 
-export const metadata: Metadata = {
-  title: 'Terms of Service | Act 60 Review',
-  description: 'Terms of Service for Act 60 Review, operated by Dis Optimus Capital LLC.',
+export async function generateMetadata() {
+  const brand = await getBrandFromHeaders()
+  return {
+    title: `Terms of Service | ${brand.name}`,
+    description: `Terms of Service for ${brand.name}, operated by Dis Optimus Capital LLC.`,
+  }
 }
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const brand = await getBrandFromHeaders()
+  const supportEmail = `support@${brand.domain}`
   return (
     <main className="min-h-screen bg-navy-900 pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +23,7 @@ export default function TermsPage() {
         <div className="prose-custom space-y-8 text-slate-400 text-[15px] leading-relaxed">
           <section>
             <h2 className="font-serif text-xl text-slate-200 mb-3">1. Agreement to Terms</h2>
-            <p>By accessing or using the Act 60 Review service (&ldquo;Service&rdquo;), operated by Dis Optimus Capital LLC (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), a Puerto Rico limited liability company, you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). If you do not agree to these Terms, you may not access or use the Service.</p>
+            <p>By accessing or using the {brand.name} service (&ldquo;Service&rdquo;), operated by Dis Optimus Capital LLC (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), a Puerto Rico limited liability company, you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). If you do not agree to these Terms, you may not access or use the Service.</p>
           </section>
 
           <section>
@@ -39,7 +44,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="font-serif text-xl text-slate-200 mb-3">5. Payment and Refund Policy</h2>
-            <p>Payments are processed securely through Stripe. All fees are stated in U.S. dollars. You agree to pay the applicable fees for the tier of service you select. We offer a full refund within seven (7) days of receiving your report, no questions asked. Refund requests must be submitted via email to support@act60review.com. Refunds are processed within 5-10 business days.</p>
+            <p>Payments are processed securely through Stripe. All fees are stated in U.S. dollars. You agree to pay the applicable fees for the tier of service you select. We offer a full refund within seven (7) days of receiving your report, no questions asked. Refund requests must be submitted via email to {supportEmail}. Refunds are processed within 5-10 business days.</p>
           </section>
 
           <section>
@@ -96,7 +101,7 @@ export default function TermsPage() {
             <p className="mt-2 text-slate-300">
               Dis Optimus Capital LLC<br />
               San Juan, Puerto Rico<br />
-              support@act60review.com
+              {supportEmail}
             </p>
           </section>
         </div>

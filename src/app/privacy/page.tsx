@@ -1,12 +1,17 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
+import { getBrandFromHeaders } from '@/config/brands.server'
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Act 60 Review',
-  description: 'Privacy Policy for Act 60 Review, operated by Dis Optimus Capital LLC.',
+export async function generateMetadata() {
+  const brand = await getBrandFromHeaders()
+  return {
+    title: `Privacy Policy | ${brand.name}`,
+    description: `Privacy Policy for ${brand.name}, operated by Dis Optimus Capital LLC.`,
+  }
 }
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const brand = await getBrandFromHeaders()
+  const supportEmail = `support@${brand.domain}`
   return (
     <main className="min-h-screen bg-navy-900 pt-28 pb-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +23,7 @@ export default function PrivacyPage() {
         <div className="space-y-8 text-slate-400 text-[15px] leading-relaxed">
           <section>
             <h2 className="font-serif text-xl text-slate-200 mb-3">1. Introduction</h2>
-            <p>Dis Optimus Capital LLC (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the Act 60 Review service (&ldquo;Service&rdquo;). This Privacy Policy describes how we collect, use, store, and protect your personal information when you use our Service. We are committed to protecting the privacy and security of the sensitive financial information you entrust to us.</p>
+            <p>Dis Optimus Capital LLC (&ldquo;Company,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) operates the {brand.name} service (&ldquo;Service&rdquo;). This Privacy Policy describes how we collect, use, store, and protect your personal information when you use our Service. We are committed to protecting the privacy and security of the sensitive financial information you entrust to us.</p>
           </section>
 
           <section>
@@ -92,7 +97,7 @@ export default function PrivacyPage() {
               <li>Request a copy of your data in a portable format</li>
               <li>Opt out of marketing communications</li>
             </ul>
-            <p className="mt-3">To exercise any of these rights, contact us at support@act60review.com. We will respond to your request within thirty (30) days.</p>
+            <p className="mt-3">To exercise any of these rights, contact us at {supportEmail}. We will respond to your request within thirty (30) days.</p>
           </section>
 
           <section>
@@ -116,7 +121,7 @@ export default function PrivacyPage() {
             <p className="mt-2 text-slate-300">
               Dis Optimus Capital LLC<br />
               San Juan, Puerto Rico<br />
-              support@act60review.com
+              {supportEmail}
             </p>
           </section>
         </div>
