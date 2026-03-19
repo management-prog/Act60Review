@@ -55,7 +55,7 @@ ${formatSection('Comparisons', comparisons)}
 - Entity: Dis Optimus Capital LLC, San Juan, Puerto Rico
 
 ## Optional
-- Full content index: ${base}/llms-full.txt
+- Full content index: ${base}/llms-full
 `
 
   return new Response(content, {

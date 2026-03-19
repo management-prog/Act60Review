@@ -144,13 +144,12 @@ export default async function SeoPage({ params }: PageProps) {
 
   return (
     <>
+      {/* Structured Data - all from trusted internal data, not user input */}
+      <script id={`faq-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
+      <script id={`breadcrumb-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
+      <script id={`article-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleJsonLd }} />
       <Navbar brand={brand} />
       <main className="min-h-screen bg-navy-900">
-        {/* Structured Data - all from trusted internal data */}
-        <script id={`faq-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
-        <script id={`breadcrumb-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
-        <script id={`article-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleJsonLd }} />
-
         {/* Breadcrumb nav */}
         <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-2">
           <ol className="flex items-center gap-1.5 text-xs text-slate-600">

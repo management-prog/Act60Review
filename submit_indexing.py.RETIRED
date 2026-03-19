@@ -1,0 +1,14 @@
+"""
+RETIRED 2026-03-19 — DO NOT USE.
+
+The Google Indexing API is ONLY for JobPosting and BroadcastEvent schema pages.
+Using it for regular pages risks deindexing.
+
+Replaced by:
+- C:/Users/alpha/google-indexing/submit_sitemaps.py (proper sitemap submission via GSC API)
+- C:/Users/alpha/google-indexing/monitor_canonicals.py (canonical monitoring via URL Inspection API)
+
+Original script: Staggered Google Indexing API submission for Act60Review multi-domain.
+Submitted 15 URLs per day across 3 domains (5 per domain per day).
+"""
+raise SystemExit("RETIRED: This script has been retired. See docstring for replacements.")
