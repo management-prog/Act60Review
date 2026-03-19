@@ -6,6 +6,9 @@ export async function generateMetadata() {
   return {
     title: `Terms of Service | ${brand.name}`,
     description: `Terms of Service for ${brand.name}, operated by Dis Optimus Capital LLC.`,
+    alternates: {
+      canonical: `https://${brand.domain}/terms`,
+    },
   }
 }
 

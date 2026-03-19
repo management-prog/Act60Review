@@ -9,8 +9,24 @@ const domainToBrand: Record<string, string> = {
   'www.act60shield.com': 'act60shield',
 }
 
+const wwwToNonWww: Record<string, string> = {
+  'www.act60review.com': 'act60review.com',
+  'www.decreecheck.com': 'decreecheck.com',
+  'www.act60shield.com': 'act60shield.com',
+}
+
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host') ?? ''
+
+  // Redirect www to non-www (301) to prevent duplicate content
+  const nonWwwHost = wwwToNonWww[host]
+  if (nonWwwHost) {
+    const url = request.nextUrl.clone()
+    url.host = nonWwwHost
+    url.protocol = 'https'
+    return NextResponse.redirect(url, 301)
+  }
+
   const brandId = domainToBrand[host] ?? 'act60review'
 
   const requestHeaders = new Headers(request.headers)

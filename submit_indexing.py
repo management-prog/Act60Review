@@ -60,7 +60,7 @@ SEO_SLUGS = [
     "act-60-exit-strategy-tax-planning", "act-60-audit-survival-guide",
 ]
 
-STATIC_PATHS = ["", "terms", "privacy", "disclaimer", "sitemap.xml"]
+STATIC_PATHS = ["", "terms", "privacy", "disclaimer"]
 
 
 def get_all_urls():

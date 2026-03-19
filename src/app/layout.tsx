@@ -22,6 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${brand.name} | ${brand.tagline}`,
     description: brand.description,
     keywords: 'Act 60, Puerto Rico tax review, Act 60 compliance, IRS Campaign 685, decree holder tax, PR tax return review, AI tax review',
+    alternates: {
+      canonical: `https://${brand.domain}`,
+    },
     openGraph: {
       title: `${brand.name} | ${brand.tagline}`,
       description: brand.description,

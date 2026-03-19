@@ -6,6 +6,9 @@ export async function generateMetadata() {
   return {
     title: `Privacy Policy | ${brand.name}`,
     description: `Privacy Policy for ${brand.name}, operated by Dis Optimus Capital LLC.`,
+    alternates: {
+      canonical: `https://${brand.domain}/privacy`,
+    },
   }
 }
 
