@@ -4,10 +4,9 @@ import { getAllSeoPages } from '@/data/seo-pages'
 
 export async function GET() {
   const h = await headers()
-  const host = h.get('host') ?? 'act60review.com'
   const brandId = h.get('x-brand-id') ?? 'act60review'
   const brand = getBrandFromId(brandId)
-  const base = `https://${host}`
+  const base = `https://${brand.domain}`
   const pages = getAllSeoPages(brandId)
 
   const taxTopics = pages.filter((p) => !p.slug.startsWith('moving-from-') && !p.slug.startsWith('act-60-for-') && !p.slug.startsWith('act-60-tax-advisor-') && !p.slug.includes('-vs-'))

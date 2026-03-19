@@ -4,10 +4,9 @@ import { getAllSeoPages } from '@/data/seo-pages'
 
 export async function GET() {
   const h = await headers()
-  const host = h.get('host') ?? 'act60review.com'
   const brandId = h.get('x-brand-id') ?? 'act60review'
   const brand = getBrandFromId(brandId)
-  const base = `https://${host}`
+  const base = `https://${brand.domain}`
   const pages = getAllSeoPages(brandId)
 
   const sections = pages.map((p) => {
@@ -40,6 +39,9 @@ ${sections.join('\n\n')}
 `
 
   return new Response(content, {
-    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+    },
   })
 }

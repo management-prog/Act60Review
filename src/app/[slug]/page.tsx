@@ -61,18 +61,21 @@ function getTopicCategory(slug: string): string {
   return 'Tax Topics'
 }
 
-function getCrossSiteLinks(brandId: string, slug: string): { domain: string; name: string; label: string }[] {
+function getCrossSiteLinks(brandId: string, slug: string): { domain: string; name: string; label: string; targetSlug: string }[] {
   const allBrands = getAllBrands()
-  const links: { domain: string; name: string; label: string }[] = []
+  const links: { domain: string; name: string; label: string; targetSlug: string }[] = []
 
   for (const other of allBrands) {
     if (other.id === brandId) continue
+
+    const targetSlug = getSeoPage(other.id, slug) ? slug : ''
 
     if (other.id === 'decreecheck' && brandId !== 'decreecheck') {
       links.push({
         domain: other.domain,
         name: other.name,
         label: 'Run a quick compliance check',
+        targetSlug,
       })
     }
     if (other.id === 'act60shield' && brandId !== 'act60shield') {
@@ -81,6 +84,7 @@ function getCrossSiteLinks(brandId: string, slug: string): { domain: string; nam
           domain: other.domain,
           name: other.name,
           label: 'Get audit defense protection',
+          targetSlug,
         })
       }
     }
@@ -89,6 +93,7 @@ function getCrossSiteLinks(brandId: string, slug: string): { domain: string; nam
         domain: other.domain,
         name: other.name,
         label: 'Get a comprehensive AI review',
+        targetSlug,
       })
     }
   }
@@ -124,7 +129,7 @@ export default async function SeoPage({ params }: PageProps) {
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `https://${brand.domain}` },
-      { '@type': 'ListItem', position: 2, name: category, item: `https://${brand.domain}/#${category.toLowerCase().replace(/\s+/g, '-')}` },
+      { '@type': 'ListItem', position: 2, name: category },
       { '@type': 'ListItem', position: 3, name: page.title },
     ],
   })
@@ -139,7 +144,7 @@ export default async function SeoPage({ params }: PageProps) {
     publisher: { '@id': `https://${brand.domain}/#organization` },
     mainEntityOfPage: `https://${brand.domain}/${slug}`,
     datePublished: '2026-03-17',
-    dateModified: '2026-03-19',
+    dateModified: new Date().toISOString().split('T')[0],
   })
 
   return (
@@ -151,7 +156,7 @@ export default async function SeoPage({ params }: PageProps) {
       <Navbar brand={brand} />
       <main className="min-h-screen bg-navy-900">
         {/* Breadcrumb nav */}
-        <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-2">
+        <nav aria-label="Breadcrumb" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-2">
           <ol className="flex items-center gap-1.5 text-xs text-slate-600">
             <li><Link href="/" className="hover:text-accent transition-colors">{brand.name}</Link></li>
             <li>/</li>
@@ -240,7 +245,7 @@ export default async function SeoPage({ params }: PageProps) {
               {crossSiteLinks.map((link) => (
                 <a
                   key={link.domain}
-                  href={`https://${link.domain}/${slug}`}
+                  href={`https://${link.domain}/${link.targetSlug}`}
                   className="flex-1 p-4 border border-white/[0.05] hover:border-accent/20 transition-colors group"
                   rel="noopener"
                 >
