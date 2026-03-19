@@ -879,15 +879,15 @@
     "sections": [
       {
         "heading": "The IRS Is Targeting Depreciation Recapture: Are You Prepared?",
-        "text": "The IRS has been explicit: its examination of Act 60 returns includes a focus on the \"disposition of assets and depreciation recapture.\" This is not a theoretical risk; it is an active enforcement priority. When you sell a depreciated asset, the gain attributable to those deductions must be recognized as ordinary income, not tax-free capital gains. An error here is a red flag that can trigger a full-blown Hacienda or IRS audit. In the current climate, simply hoping your numbers are correct is not a strategy. You need a proactive defense.\n\nAct60Shield provides that defense. Our system is designed to stress-test your tax positions, specifically simulating the scrutiny an auditor would apply to your asset sales. We analyze your depreciation schedules and sales transactions to create a clear, documented trail that substantiates your reporting. This is the level of preparation required to confidently face inquiries from tax authorities. For those who understand that the best defense is a good offense, our tool provides the critical evidence needed to fortify your compliance posture before it is ever questioned."
+        "content": "The IRS has been explicit: its examination of Act 60 returns includes a focus on the \"disposition of assets and depreciation recapture.\" This is not a theoretical risk; it is an active enforcement priority. When you sell a depreciated asset, the gain attributable to those deductions must be recognized as ordinary income, not tax-free capital gains. An error here is a red flag that can trigger a full-blown Hacienda or IRS audit. In the current climate, simply hoping your numbers are correct is not a strategy. You need a proactive defense.\n\nAct60Shield provides that defense. Our system is designed to stress-test your tax positions, specifically simulating the scrutiny an auditor would apply to your asset sales. We analyze your depreciation schedules and sales transactions to create a clear, documented trail that substantiates your reporting. This is the level of preparation required to confidently face inquiries from tax authorities. For those who understand that the best defense is a good offense, our tool provides the critical evidence needed to fortify your compliance posture before it is ever questioned."
       },
       {
         "heading": "Fortifying Your Position on Section 1245 & 1250 Assets",
-        "text": "Your defense strategy must account for the different types of assets you own. Section 1245 property, which includes most business equipment and tangible personal property, carries the highest risk. The rule is unforgiving: all prior depreciation is recaptured as ordinary income upon sale. There is no ambiguity for an auditor to exploit if your records are pristine. Our platform helps ensure they are, by flagging every asset sale that falls under this rule and verifying the recapture calculation, creating an audit-ready file.\n\nSection 1250 property (real estate) presents a more complex challenge, involving nuanced rules around \"unrecaptured Section 1250 gain\" and the history of depreciation methods used. An auditor may challenge your characterization of the gain, especially for properties owned prior to your move to Puerto Rico. Act60Shield is engineered to address this complexity head-on. It models the application of both U.S. and Puerto Rico tax law to your real estate transactions, providing a clear rationale for your tax position. This documentation is invaluable in demonstrating to tax authorities that you have performed your due diligence and have a reasonable basis for your filing."
+        "content": "Your defense strategy must account for the different types of assets you own. Section 1245 property, which includes most business equipment and tangible personal property, carries the highest risk. The rule is unforgiving: all prior depreciation is recaptured as ordinary income upon sale. There is no ambiguity for an auditor to exploit if your records are pristine. Our platform helps ensure they are, by flagging every asset sale that falls under this rule and verifying the recapture calculation, creating an audit-ready file.\n\nSection 1250 property (real estate) presents a more complex challenge, involving nuanced rules around \"unrecaptured Section 1250 gain\" and the history of depreciation methods used. An auditor may challenge your characterization of the gain, especially for properties owned prior to your move to Puerto Rico. Act60Shield is engineered to address this complexity head-on. It models the application of both U.S. and Puerto Rico tax law to your real estate transactions, providing a clear rationale for your tax position. This documentation is invaluable in demonstrating to tax authorities that you have performed your due diligence and have a reasonable basis for your filing."
       },
       {
         "heading": "Building a Bulletproof Record for Cross-Jurisdictional Sales",
-        "text": "The single greatest point of failure for Act 60 decree holders is the incorrect sourcing of income. The IRS knows this. As noted in the GAO report on Puerto Rico (GAO-26-107225), the rules for determining whether income is from U.S. or Puerto Rico sources are complex and often misapplied. When you sell an asset, the sourcing of that sale dictates which government has the right to tax the recapture. Getting it wrong can lead to accusations of tax evasion.\n\nAct60Shield was built to mitigate this specific risk. Our system analyzes the factors that determine income sourcing—such as the asset's location, where it was used, and your tax home—to build a robust, defensible position for every transaction. We document the \"why\" behind your sourcing decision, creating a contemporaneous record that is far more powerful than trying to justify your position years later during an audit. For serious decree holders, this level of proactive defense is not optional; it is essential to protecting the benefits you worked so hard to obtain."
+        "content": "The single greatest point of failure for Act 60 decree holders is the incorrect sourcing of income. The IRS knows this. As noted in the GAO report on Puerto Rico (GAO-26-107225), the rules for determining whether income is from U.S. or Puerto Rico sources are complex and often misapplied. When you sell an asset, the sourcing of that sale dictates which government has the right to tax the recapture. Getting it wrong can lead to accusations of tax evasion.\n\nAct60Shield was built to mitigate this specific risk. Our system analyzes the factors that determine income sourcing—such as the asset's location, where it was used, and your tax home—to build a robust, defensible position for every transaction. We document the \"why\" behind your sourcing decision, creating a contemporaneous record that is far more powerful than trying to justify your position years later during an audit. For serious decree holders, this level of proactive defense is not optional; it is essential to protecting the benefits you worked so hard to obtain."
       }
     ],
     "faqItems": [
@@ -914,11 +914,11 @@
     ],
     "ctaText": "Activate Your Shield",
     "relatedSlugs": [
-      "act-60-hacienda-audit-defense`",
-      "`irs-campaign-685-explained`",
-      "`act-60-compliance-checklist-2026`",
-      "`act-60-common-filing-mistakes`",
-      "`act-60-record-keeping-requirements"
+      "act-60-hacienda-audit-defense",
+      "irs-campaign-685-explained",
+      "act-60-compliance-checklist-2026",
+      "act-60-common-filing-mistakes",
+      "act-60-record-keeping-requirements"
     ],
     "disclaimer": "This content is for informational purposes only and does not constitute tax, legal, or accounting advice."
   },
@@ -926,15 +926,15 @@
     "sections": [
       {
         "heading": "The AMT: A Backdoor for IRS Audits",
-        "text": "The complexities of the AMT calculation, especially in the context of Act 60, create opportunities for errors and omissions that can trigger an IRS audit. With the recent announcement of IRS Campaign 685, which specifically targets high-income individuals with potential non-compliance, a robust defense strategy is more critical than ever. Act60Shield.com is built to fortify your compliance posture."
+        "content": "The complexities of the AMT calculation, especially in the context of Act 60, create opportunities for errors and omissions that can trigger an IRS audit. With the recent announcement of IRS Campaign 685, which specifically targets high-income individuals with potential non-compliance, a robust defense strategy is more critical than ever. Act60Shield.com is built to fortify your compliance posture."
       },
       {
         "heading": "Fortifying Your Position Against AMT Preference Items",
-        "text": "Incentive stock options (ISOs), private activity bonds, and other tax preference items can be a minefield for the unprepared Act 60 holder. Our in-depth analysis goes beyond a simple review to provide a comprehensive defense file. We document your positions and provide the support you need to withstand IRS scrutiny, ensuring you are prepared for any inquiry."
+        "content": "Incentive stock options (ISOs), private activity bonds, and other tax preference items can be a minefield for the unprepared Act 60 holder. Our in-depth analysis goes beyond a simple review to provide a comprehensive defense file. We document your positions and provide the support you need to withstand IRS scrutiny, ensuring you are prepared for any inquiry."
       },
       {
         "heading": "IRC Section 933 and the Burden of Proof",
-        "text": "While IRC Section 933 provides a powerful exclusion for Puerto Rico-sourced income, the burden of proof is on you to demonstrate that you meet all the requirements and have correctly calculated your tax liability, including any potential AMT. Act60Shield.com helps you build a robust and defensible position, backed by thorough documentation and authoritative analysis, so you can face any challenge with confidence."
+        "content": "While IRC Section 933 provides a powerful exclusion for Puerto Rico-sourced income, the burden of proof is on you to demonstrate that you meet all the requirements and have correctly calculated your tax liability, including any potential AMT. Act60Shield.com helps you build a robust and defensible position, backed by thorough documentation and authoritative analysis, so you can face any challenge with confidence."
       }
     ],
     "faqItems": [
@@ -3002,7 +3002,6 @@
     "heroIntro": "For high-profile YouTubers and content creators under Act 60, compliance is not just about saving on taxes—it's about protecting your assets from intense scrutiny. With the IRS ramping up audits via campaigns like Campaign 685, you need more than just basic filing. Act60Shield is an authoritative compliance framework designed to prepare you for the toughest questions from tax authorities.",
     "ctaText": "Activate Your Shield",
     "relatedSlugs": [
-      "- irs-campaign-685-explained",
       "act-60-hacienda-audit-defense",
       "act-60-bona-fide-residency-test",
       "act-60-record-keeping-requirements",

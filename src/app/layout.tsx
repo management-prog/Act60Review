@@ -49,7 +49,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark" data-brand={brand.id}>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-navy-900 text-slate-100`}>
-        <JsonLd />
+        <JsonLd brand={brand} />
         {children}
       </body>
     </html>

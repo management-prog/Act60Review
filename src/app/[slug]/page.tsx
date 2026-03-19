@@ -3,9 +3,8 @@ import { headers } from 'next/headers'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
-import Script from 'next/script'
-import { getBrandFromId } from '@/config/brands'
-import { getSeoPage, getAllSlugs } from '@/data/seo-pages'
+import { getBrandFromId, getAllBrands } from '@/config/brands'
+import { getSeoPage, getAllSlugs, getPageTitle } from '@/data/seo-pages'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 
@@ -51,6 +50,52 @@ export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }))
 }
 
+function getTopicCategory(slug: string): string {
+  if (slug.startsWith('moving-from-')) return 'Relocation Guides'
+  if (slug.startsWith('act-60-for-')) return 'Professional Guides'
+  if (slug.startsWith('act-60-tax-advisor-')) return 'Local Advisors'
+  if (slug.includes('-vs-')) return 'Comparisons'
+  if (slug.includes('audit') || slug.includes('campaign-685') || slug.includes('penalty') || slug.includes('defense')) return 'Audit & Defense'
+  if (slug.includes('fbar') || slug.includes('8938') || slug.includes('foreign-trust') || slug.includes('planilla') || slug.includes('form-480')) return 'Filing & Forms'
+  if (slug.includes('presence-test') || slug.includes('residency') || slug.includes('closer-connection') || slug.includes('183-day') || slug.includes('tax-home')) return 'Residency & Compliance'
+  return 'Tax Topics'
+}
+
+function getCrossSiteLinks(brandId: string, slug: string): { domain: string; name: string; label: string }[] {
+  const allBrands = getAllBrands()
+  const links: { domain: string; name: string; label: string }[] = []
+
+  for (const other of allBrands) {
+    if (other.id === brandId) continue
+
+    if (other.id === 'decreecheck' && brandId !== 'decreecheck') {
+      links.push({
+        domain: other.domain,
+        name: other.name,
+        label: 'Run a quick compliance check',
+      })
+    }
+    if (other.id === 'act60shield' && brandId !== 'act60shield') {
+      if (slug.includes('audit') || slug.includes('campaign-685') || slug.includes('defense') || slug.includes('penalty')) {
+        links.push({
+          domain: other.domain,
+          name: other.name,
+          label: 'Get audit defense protection',
+        })
+      }
+    }
+    if (other.id === 'act60review' && brandId !== 'act60review') {
+      links.push({
+        domain: other.domain,
+        name: other.name,
+        label: 'Get a comprehensive AI review',
+      })
+    }
+  }
+
+  return links.slice(0, 2)
+}
+
 export default async function SeoPage({ params }: PageProps) {
   const { slug } = await params
   const brandId = await getBrandId()
@@ -59,9 +104,14 @@ export default async function SeoPage({ params }: PageProps) {
 
   if (!page) notFound()
 
-  const jsonLd = JSON.stringify({
+  const category = getTopicCategory(slug)
+  const crossSiteLinks = getCrossSiteLinks(brandId, slug)
+
+  // All JSON-LD content is derived from trusted internal data (brand config + JSON data files), not user input
+  const faqJsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    mainEntityOfPage: `https://${brand.domain}/${slug}`,
     mainEntity: page.faqItems.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
@@ -69,20 +119,55 @@ export default async function SeoPage({ params }: PageProps) {
     })),
   })
 
+  const breadcrumbJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `https://${brand.domain}` },
+      { '@type': 'ListItem', position: 2, name: category, item: `https://${brand.domain}/#${category.toLowerCase().replace(/\s+/g, '-')}` },
+      { '@type': 'ListItem', position: 3, name: page.title },
+    ],
+  })
+
+  const articleJsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: page.h1,
+    description: page.metaDescription,
+    image: `https://${brand.domain}/seo-images/${slug}.png`,
+    author: { '@type': 'Organization', name: 'Dis Optimus Capital LLC' },
+    publisher: { '@id': `https://${brand.domain}/#organization` },
+    mainEntityOfPage: `https://${brand.domain}/${slug}`,
+    datePublished: '2026-03-17',
+    dateModified: '2026-03-19',
+  })
+
   return (
     <>
       <Navbar brand={brand} />
       <main className="min-h-screen bg-navy-900">
+        {/* Structured Data - all from trusted internal data */}
+        <script id={`faq-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />
+        <script id={`breadcrumb-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJsonLd }} />
+        <script id={`article-jsonld-${slug}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleJsonLd }} />
+
+        {/* Breadcrumb nav */}
+        <nav className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-2">
+          <ol className="flex items-center gap-1.5 text-xs text-slate-600">
+            <li><Link href="/" className="hover:text-accent transition-colors">{brand.name}</Link></li>
+            <li>/</li>
+            <li className="text-slate-500">{category}</li>
+            <li>/</li>
+            <li className="text-slate-400 truncate max-w-[200px]">{page.title}</li>
+          </ol>
+        </nav>
+
         {/* Hero */}
-        <section className="relative pt-28 pb-16 overflow-hidden">
+        <section className="relative pt-4 pb-16 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,var(--color-accent)_0%,transparent_70%)] opacity-[0.06]" />
           <div className="noise absolute inset-0 pointer-events-none" />
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link href="/" className="text-accent/60 text-sm hover:text-accent transition-colors mb-6 inline-block">
-              &larr; {brand.name}
-            </Link>
-
             <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-slate-100 mb-6 tracking-tight leading-tight">
               {page.h1}
             </h1>
@@ -150,6 +235,25 @@ export default async function SeoPage({ params }: PageProps) {
             </a>
           </section>
 
+          {/* Cross-site links */}
+          {crossSiteLinks.length > 0 && (
+            <section className="mt-12 flex flex-col sm:flex-row gap-3">
+              {crossSiteLinks.map((link) => (
+                <a
+                  key={link.domain}
+                  href={`https://${link.domain}/${slug}`}
+                  className="flex-1 p-4 border border-white/[0.05] hover:border-accent/20 transition-colors group"
+                  rel="noopener"
+                >
+                  <span className="text-xs text-slate-600 uppercase tracking-wider">{link.name}</span>
+                  <span className="block text-sm text-slate-400 group-hover:text-accent transition-colors mt-1">
+                    {link.label} &rarr;
+                  </span>
+                </a>
+              ))}
+            </section>
+          )}
+
           {/* Related */}
           {page.relatedSlugs.length > 0 && (
             <section className="mt-12">
@@ -157,7 +261,7 @@ export default async function SeoPage({ params }: PageProps) {
               <div className="flex flex-wrap gap-2">
                 {page.relatedSlugs.map((related) => (
                   <Link key={related} href={`/${related}`} className="text-sm text-slate-500 hover:text-accent border border-white/[0.05] px-3 py-1.5 hover:border-accent/20 transition-colors">
-                    {related.replace(/-/g, ' ')}
+                    {getPageTitle(brandId, related)}
                   </Link>
                 ))}
               </div>
@@ -166,10 +270,6 @@ export default async function SeoPage({ params }: PageProps) {
 
           <p className="mt-12 text-[11px] text-slate-600 leading-relaxed">{page.disclaimer}</p>
         </article>
-
-        <Script id={`faq-jsonld-${slug}`} type="application/ld+json" strategy="afterInteractive">
-          {jsonLd}
-        </Script>
       </main>
       <Footer brand={brand} />
     </>

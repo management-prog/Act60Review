@@ -5,6 +5,7 @@ import { getAllSlugs } from '@/data/seo-pages'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const h = await headers()
   const host = h.get('host') ?? 'act60review.com'
+  const brandId = h.get('x-brand-id') ?? 'act60review'
   const base = `https://${host}`
 
   const staticPages = [
@@ -14,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/disclaimer`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.3 },
   ]
 
-  const seoPages = getAllSlugs().map((slug) => ({
+  const seoPages = getAllSlugs(brandId).map((slug) => ({
     url: `${base}/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,

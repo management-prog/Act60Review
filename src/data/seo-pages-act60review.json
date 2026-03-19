@@ -37,8 +37,7 @@
     "relatedSlugs": [
       "act-60-crypto-tax-puerto-rico",
       "act-60-real-estate-gains",
-      "act-60-pre-move-appreciation",
-      "act-60-holding-period-rules"
+      "act-60-pre-move-appreciation"
     ],
     "disclaimer": "This content is for informational purposes only and does not constitute tax, legal, or accounting advice."
   },
@@ -882,15 +881,15 @@
     "sections": [
       {
         "heading": "The Core Concepts: Depreciation and Recapture for Act 60 Grantees",
-        "text": "Depreciation is a fundamental tax concept that allows businesses and investors to recover the cost of income-producing assets over their useful lives. For Act 60 decree holders in Puerto Rico, understanding its interplay with the tax incentives is paramount. When an asset that has been depreciated is later sold for a gain, the IRS and the Puerto Rico Treasury Department (Hacienda) may require a portion of that gain to be \"recaptured\" and taxed at ordinary income rates, rather than the preferential capital gains rates. This rule exists to prevent taxpayers from receiving a double benefit: deducting the asset's cost against ordinary income and then paying a lower tax rate on the gain. Our AI-powered review meticulously analyzes your asset sales to ensure recapture is calculated correctly, a step often missed in standard reviews, which can lead to significant underpayment of taxes and subsequent penalties.\n\nThe recapture rules are particularly complex for individuals who have moved to Puerto Rico and hold assets that were depreciated under U.S. tax law before the move. The sourcing of the gain and the application of recapture provisions require a detailed analysis of both IRC Section 933 and the Puerto Rico Internal Revenue Code. A misstep in this area can easily negate the benefits of Act 60. Traditional CPA firms, often charging between $5,000 and $25,000 for compliance reviews, may not have the specialized tools to model these scenarios with perfect accuracy. Our system, however, processes thousands of data points to flag these potential issues, providing a level of thoroughness that gives you confidence in your tax position."
+        "content": "Depreciation is a fundamental tax concept that allows businesses and investors to recover the cost of income-producing assets over their useful lives. For Act 60 decree holders in Puerto Rico, understanding its interplay with the tax incentives is paramount. When an asset that has been depreciated is later sold for a gain, the IRS and the Puerto Rico Treasury Department (Hacienda) may require a portion of that gain to be \"recaptured\" and taxed at ordinary income rates, rather than the preferential capital gains rates. This rule exists to prevent taxpayers from receiving a double benefit: deducting the asset's cost against ordinary income and then paying a lower tax rate on the gain. Our AI-powered review meticulously analyzes your asset sales to ensure recapture is calculated correctly, a step often missed in standard reviews, which can lead to significant underpayment of taxes and subsequent penalties.\n\nThe recapture rules are particularly complex for individuals who have moved to Puerto Rico and hold assets that were depreciated under U.S. tax law before the move. The sourcing of the gain and the application of recapture provisions require a detailed analysis of both IRC Section 933 and the Puerto Rico Internal Revenue Code. A misstep in this area can easily negate the benefits of Act 60. Traditional CPA firms, often charging between $5,000 and $25,000 for compliance reviews, may not have the specialized tools to model these scenarios with perfect accuracy. Our system, however, processes thousands of data points to flag these potential issues, providing a level of thoroughness that gives you confidence in your tax position."
       },
       {
         "heading": "Section 1245 vs. Section 1250 Property: A Detailed Comparison",
-        "text": "The tax treatment of depreciation recapture depends heavily on the type of property sold. The Internal Revenue Code distinguishes primarily between Section 1245 and Section 1250 property. Section 1245 property generally includes tangible personal property subject to depreciation, such as equipment, machinery, and vehicles. When this type of asset is sold at a gain, the gain is treated as ordinary income to the extent of all depreciation or amortization deductions previously claimed. This is a full recapture rule. For an Act 60 holder, this means the gain attributable to depreciation will not benefit from the reduced capital gains rates under the decree.\n\nIn contrast, Section 1250 property refers to depreciable real property, such as buildings and their structural components. The recapture rules for Section 1250 are more nuanced. Generally, recapture for Section 1250 property only applies to the \"additional depreciation\" – the amount of depreciation claimed that exceeds the straight-line method. However, for most real property placed in service after 1986 and depreciated using the straight-line method (as is common), there is typically no Section 1250 recapture. Instead, a separate rule under Section 1(h) imposes a maximum 25% tax rate on \"unrecaptured Section 1250 gain\" for U.S. taxpayers. Understanding how these rules are mirrored or modified under Puerto Rico law is essential. Our CPA-verified process is designed to catch these distinctions, ensuring your gains from real estate and other assets are characterized correctly."
+        "content": "The tax treatment of depreciation recapture depends heavily on the type of property sold. The Internal Revenue Code distinguishes primarily between Section 1245 and Section 1250 property. Section 1245 property generally includes tangible personal property subject to depreciation, such as equipment, machinery, and vehicles. When this type of asset is sold at a gain, the gain is treated as ordinary income to the extent of all depreciation or amortization deductions previously claimed. This is a full recapture rule. For an Act 60 holder, this means the gain attributable to depreciation will not benefit from the reduced capital gains rates under the decree.\n\nIn contrast, Section 1250 property refers to depreciable real property, such as buildings and their structural components. The recapture rules for Section 1250 are more nuanced. Generally, recapture for Section 1250 property only applies to the \"additional depreciation\" – the amount of depreciation claimed that exceeds the straight-line method. However, for most real property placed in service after 1986 and depreciated using the straight-line method (as is common), there is typically no Section 1250 recapture. Instead, a separate rule under Section 1(h) imposes a maximum 25% tax rate on \"unrecaptured Section 1250 gain\" for U.S. taxpayers. Understanding how these rules are mirrored or modified under Puerto Rico law is essential. Our CPA-verified process is designed to catch these distinctions, ensuring your gains from real estate and other assets are characterized correctly."
       },
       {
         "heading": "Puerto Rico vs. U.S. Tax Treatment of Depreciation Recapture",
-        "text": "The interaction between U.S. and Puerto Rico tax law creates a complex compliance landscape for Act 60 decree holders. While the concepts of depreciation and recapture are similar, the specific rules and rates can differ. For a bona fide resident of Puerto Rico, U.S. source income may still be subject to U.S. tax, and the recapture provisions of IRC Sections 1245 and 1250 would apply. However, for Puerto Rico source income, the provisions of the Puerto Rico Internal Revenue Code govern. This dual-jurisdictional analysis is a critical source of errors that can lead to audits.\n\nFor instance, Puerto Rico has its own set of rules for calculating depreciation and recapture, which may not perfectly align with the federal rules. The sourcing of income from the sale of property—whether it is U.S. source, PR source, or a mix—is a determination that requires careful analysis of the facts and circumstances, as outlined in IRC Section 865 and related regulations. The GAO Report (GAO-26-107225) has highlighted the complexities and potential for non-compliance in this area. Our platform is specifically designed to navigate these cross-jurisdictional challenges, applying the correct rules based on the asset's location, usage, and your residency status, providing a level of scrutiny that goes far beyond a manual review."
+        "content": "The interaction between U.S. and Puerto Rico tax law creates a complex compliance landscape for Act 60 decree holders. While the concepts of depreciation and recapture are similar, the specific rules and rates can differ. For a bona fide resident of Puerto Rico, U.S. source income may still be subject to U.S. tax, and the recapture provisions of IRC Sections 1245 and 1250 would apply. However, for Puerto Rico source income, the provisions of the Puerto Rico Internal Revenue Code govern. This dual-jurisdictional analysis is a critical source of errors that can lead to audits.\n\nFor instance, Puerto Rico has its own set of rules for calculating depreciation and recapture, which may not perfectly align with the federal rules. The sourcing of income from the sale of property—whether it is U.S. source, PR source, or a mix—is a determination that requires careful analysis of the facts and circumstances, as outlined in IRC Section 865 and related regulations. The GAO Report (GAO-26-107225) has highlighted the complexities and potential for non-compliance in this area. Our platform is specifically designed to navigate these cross-jurisdictional challenges, applying the correct rules based on the asset's location, usage, and your residency status, providing a level of scrutiny that goes far beyond a manual review."
       }
     ],
     "faqItems": [
@@ -917,11 +916,11 @@
     ],
     "ctaText": "Get Your Review",
     "relatedSlugs": [
-      "act-60-capital-gains-tax`",
-      "`act-60-real-estate-gains`",
-      "`act-60-pre-move-appreciation`",
-      "`act-60-partnership-income`",
-      "`act-60-s-corp-tax-treatment"
+      "act-60-capital-gains-tax",
+      "act-60-real-estate-gains",
+      "act-60-pre-move-appreciation",
+      "act-60-partnership-income",
+      "act-60-s-corp-tax-treatment"
     ],
     "disclaimer": "This content is for informational purposes only and does not constitute tax, legal, or accounting advice."
   },
@@ -929,15 +928,15 @@
     "sections": [
       {
         "heading": "Understanding the AMT and Its Interaction with Act 60",
-        "text": "The AMT is a parallel tax system designed to ensure high-income individuals pay a minimum amount of tax. For Act 60 beneficiaries, the key is understanding how the exclusion of Puerto Rico-sourced income under IRC Section 933 interacts with the AMT calculation. Certain \"preference items,\" which are deductible under the regular tax system, are added back for AMT purposes. This can inadvertently trigger AMT liability, even for those who believe their income is fully exempt. Our review meticulously examines your income sources and deductions to model potential AMT scenarios."
+        "content": "The AMT is a parallel tax system designed to ensure high-income individuals pay a minimum amount of tax. For Act 60 beneficiaries, the key is understanding how the exclusion of Puerto Rico-sourced income under IRC Section 933 interacts with the AMT calculation. Certain \"preference items,\" which are deductible under the regular tax system, are added back for AMT purposes. This can inadvertently trigger AMT liability, even for those who believe their income is fully exempt. Our review meticulously examines your income sources and deductions to model potential AMT scenarios."
       },
       {
         "heading": "Common AMT Preference Items for Act 60 Holders",
-        "text": "Several tax preference items can create AMT exposure for Act 60 decree holders. These often include state and local tax deductions (though less common for PR residents), certain tax-exempt interest, and the exercise of incentive stock options (ISOs). The spread between the ISO exercise price and the fair market value of the stock is a significant preference item that can trigger a substantial AMT liability. Act60Review.com's AI-driven analysis is specifically trained to identify these and over 200 other potential compliance risks."
+        "content": "Several tax preference items can create AMT exposure for Act 60 decree holders. These often include state and local tax deductions (though less common for PR residents), certain tax-exempt interest, and the exercise of incentive stock options (ISOs). The spread between the ISO exercise price and the fair market value of the stock is a significant preference item that can trigger a substantial AMT liability. Act60Review.com's AI-driven analysis is specifically trained to identify these and over 200 other potential compliance risks."
       },
       {
         "heading": "The Role of IRC Section 933 and Form 6251",
-        "text": "IRC Section 933 is the cornerstone of Act 60's tax benefits, allowing bona fide residents of Puerto Rico to exclude income from sources within the island from their U.S. gross income. However, this exclusion does not automatically exempt you from the AMT. You may still need to file Form 6251, Alternative Minimum Tax—Individuals. Our CPA-verified process ensures that your unique situation is analyzed in the context of the latest IRS guidance and court rulings, providing a clear picture of your potential AMT obligations."
+        "content": "IRC Section 933 is the cornerstone of Act 60's tax benefits, allowing bona fide residents of Puerto Rico to exclude income from sources within the island from their U.S. gross income. However, this exclusion does not automatically exempt you from the AMT. You may still need to file Form 6251, Alternative Minimum Tax—Individuals. Our CPA-verified process ensures that your unique situation is analyzed in the context of the latest IRS guidance and court rulings, providing a clear picture of your potential AMT obligations."
       }
     ],
     "faqItems": [
@@ -2844,7 +2843,6 @@
     "ctaText": "Get Your Review",
     "relatedSlugs": [
       "act-60-consulting-income-sourcing",
-      "act-60-export-services-qualification",
       "act-60-compliance-checklist-2026",
       "act-60-bona-fide-residency-test",
       "act-60-tax-advisor-san-juan"
@@ -3013,7 +3011,6 @@
     "heroIntro": "As a high-earning YouTuber or content creator, navigating Puerto Rico's Act 60 tax incentives requires a level of precision that goes beyond standard advice. Our comprehensive, AI-driven review, verified by CPAs, is meticulously designed to analyze the unique complexities of your income streams—from ad revenue and brand sponsorships to the strategic treatment of your intellectual property. We ensure your tax structure is not only compliant but optimized.",
     "ctaText": "Get Your Review",
     "relatedSlugs": [
-      "- act-60-intellectual-property-income",
       "act-60-consulting-income-sourcing",
       "act-60-passive-income-rules",
       "act-60-self-employment-tax",
@@ -3226,7 +3223,6 @@
     "relatedSlugs": [
       "act-60-consulting-income-sourcing",
       "act-60-partnership-income",
-      "act-60-telemedicine-sourcing",
       "act-60-bona-fide-residency-test",
       "act-60-compliance-checklist-2026"
     ],
