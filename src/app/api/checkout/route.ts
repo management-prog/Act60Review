@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     const brandId = request.headers.get('x-brand-id') ?? 'act60review'
     const brand = getBrandFromId(brandId)
 
-    if (!tier || !['basic', 'comprehensive', 'defense'].includes(tier)) {
+    if (!tier || !['basic', 'comprehensive', 'defense', 'premium', 'enterprise'].includes(tier)) {
       return NextResponse.json(
         { error: 'Invalid tier selected' },
         { status: 400 }
