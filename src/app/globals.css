@@ -310,6 +310,14 @@ body {
   --sidebar-ring: #C9A96E;
 }
 
+/* Ensure content visible even if JS/animations fail */
+@media (prefers-reduced-motion: reduce) {
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

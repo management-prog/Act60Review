@@ -20,7 +20,7 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-slate-100 mb-5 tracking-tight leading-[1.1]">
             The Cost of Not Knowing

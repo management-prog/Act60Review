@@ -43,7 +43,7 @@ export default function Pricing({ brand }: PricingProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mb-10"
         >
           <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
@@ -63,7 +63,7 @@ export default function Pricing({ brand }: PricingProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mb-14"
         >
           <p className="text-sm text-slate-500 mb-4">
@@ -92,7 +92,7 @@ export default function Pricing({ brand }: PricingProps) {
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.1 }}
               className={`relative flex flex-col p-8 ${
                 tier.popular ? 'bg-accent/[0.02]' : 'bg-navy-900'
@@ -158,7 +158,7 @@ export default function Pricing({ brand }: PricingProps) {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mt-10 text-sm text-slate-600"
         >
           100% money-back guarantee. No questions asked within 7 days.

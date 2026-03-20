@@ -56,7 +56,7 @@ export default function WhatWeCatch() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mb-16"
         >
           <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
@@ -79,7 +79,7 @@ export default function WhatWeCatch() {
                 key={cat.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: index * 0.06 }}
                 className="bg-navy-900 p-7 hover:bg-white/[0.01] transition-colors duration-300"
               >

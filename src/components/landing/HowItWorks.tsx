@@ -46,7 +46,7 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mb-16"
         >
           <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
@@ -66,7 +66,7 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
               key={step.number}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.12 }}
               className="relative px-6 lg:px-8 py-8 text-center lg:text-left"
             >
