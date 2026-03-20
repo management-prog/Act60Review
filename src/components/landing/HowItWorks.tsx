@@ -68,7 +68,7 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.12 }}
-              className="relative px-6 lg:px-8 py-8 text-center lg:text-left"
+              className="relative px-4 sm:px-6 lg:px-8 py-8 text-center lg:text-left"
             >
               {/* Vertical divider between steps */}
               {index < steps.length - 1 && (

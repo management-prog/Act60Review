@@ -145,7 +145,7 @@ export default function Hero({ brand }: HeroProps) {
           >
             <a
               href="#pricing"
-              className="group inline-flex items-center gap-3 bg-accent text-navy-900 font-semibold text-sm px-8 py-4 tracking-wide uppercase transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_50px_rgba(201,169,110,0.2)]"
+              className="group inline-flex items-center gap-3 bg-accent text-navy-900 font-semibold text-sm px-5 sm:px-8 py-4 tracking-wide uppercase transition-all duration-300 hover:bg-accent-light hover:shadow-[0_0_50px_rgba(201,169,110,0.2)]"
             >
               {brand.ctaText}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

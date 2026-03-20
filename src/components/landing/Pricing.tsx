@@ -37,7 +37,7 @@ export default function Pricing({ brand }: PricingProps) {
     <section id="pricing" className="relative py-28 bg-navy-900 noise">
       <div className="section-line" />
 
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/[0.03] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[500px] h-[80vw] max-h-[500px] bg-accent/[0.03] rounded-full blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -94,7 +94,7 @@ export default function Pricing({ brand }: PricingProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.1 }}
-              className={`relative flex flex-col p-8 ${
+              className={`relative flex flex-col p-5 sm:p-8 ${
                 tier.popular ? 'bg-accent/[0.02]' : 'bg-navy-900'
               }`}
             >

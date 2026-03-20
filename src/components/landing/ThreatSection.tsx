@@ -146,7 +146,7 @@ export default function ThreatSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.08 }}
-              className="bg-navy-900 p-8 hover:bg-white/[0.01] transition-colors duration-300"
+              className="bg-navy-900 p-5 sm:p-8 hover:bg-white/[0.01] transition-colors duration-300"
             >
               <div className={`font-sans text-4xl font-bold tracking-tight mb-1 ${threat.color}`}>
                 <AnimatedNumber value={threat.stat} />
