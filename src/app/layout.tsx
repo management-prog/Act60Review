@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { getBrandFromHeaders } from '@/config/brands.server'
 import { JsonLd } from '@/components/json-ld'
@@ -49,6 +50,18 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark" data-brand={brand.id}>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-navy-900 text-slate-100`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-E45JBVPNT4"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-E45JBVPNT4');
+          `}
+        </Script>
         <JsonLd brand={brand} />
         {children}
       </body>
