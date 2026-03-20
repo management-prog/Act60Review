@@ -47,7 +47,22 @@ const severityStyles = {
   medium: { border: 'border-yellow-500/20', text: 'text-yellow-400', bg: 'bg-yellow-500/[0.06]' },
 }
 
-export default function WhatWeCatch() {
+interface WhatWeCatchProps {
+  brand?: { id: string; tier: string }
+}
+
+export default function WhatWeCatch({ brand }: WhatWeCatchProps) {
+  const sectionTitle = brand?.tier === 'defense'
+    ? 'What Auditors Target'
+    : brand?.tier === 'diy'
+    ? 'What Your Scan Checks'
+    : '200+ Rules. Eight Categories.'
+
+  const sectionSubtitle = brand?.tier === 'defense'
+    ? 'IRS Campaign 685 agents focus on these exact compliance areas during Act 60 audits.'
+    : brand?.tier === 'diy'
+    ? 'Our AI scans for the same issues that trigger IRS enforcement actions.'
+    : 'The exact issues that trigger audits and enforcement actions.'
   return (
     <section className="relative py-28 bg-navy-800/50 noise">
       <div className="section-line" />
@@ -63,10 +78,10 @@ export default function WhatWeCatch() {
             What We Catch
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
-            200+ Rules. Eight Categories.
+            {sectionTitle}
           </h2>
           <p className="text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
-            The exact issues that trigger audits and enforcement actions.
+            {sectionSubtitle}
           </p>
         </motion.div>
 

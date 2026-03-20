@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
+import GuaranteeBadge from '@/components/ui/GuaranteeBadge'
 
 interface FinalCTAProps {
   brand: BrandConfig
@@ -27,9 +28,14 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
             <br className="hidden sm:block" />
             {' '}Is <em className="text-red-400 italic">$287,000</em>
           </h2>
-          <p className="text-lg text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg text-slate-400 max-w-xl mx-auto mb-4 leading-relaxed">
             That&apos;s the average IRS deficiency for Act 60 holders. A review
             isn&apos;t an expense &mdash; it&apos;s insurance against a six-figure assessment.
+          </p>
+
+          {/* Alt cost frame */}
+          <p className="text-sm text-accent/80 font-medium mb-10">
+            {brand.altCostFrame}
           </p>
 
           <a
@@ -40,12 +46,17 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500 uppercase tracking-[0.12em]">
-            <span>CPA-Verified</span>
-            <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
-            <span>SOC 2 Compliant</span>
-            <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
-            <span>Money-Back Guarantee</span>
+          <div className="mt-6 flex justify-center">
+            <GuaranteeBadge size="md" />
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500 uppercase tracking-[0.12em]">
+            {brand.trustBadges.map((badge, i) => (
+              <span key={badge} className="flex items-center gap-5">
+                {i > 0 && <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />}
+                <span>{badge}</span>
+              </span>
+            ))}
           </div>
         </motion.div>
       </div>

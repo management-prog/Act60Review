@@ -22,6 +22,7 @@ export default function Navbar({ brand }: NavbarProps) {
   const links = [
     { href: '#how-it-works', label: 'How It Works' },
     { href: '#pricing', label: 'Pricing' },
+    { href: '/lead-magnet', label: 'Free Checklist' },
     { href: '#faq', label: 'FAQ' },
   ]
 

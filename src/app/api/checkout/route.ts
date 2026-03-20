@@ -14,14 +14,21 @@ export async function POST(request: NextRequest) {
     const brandId = request.headers.get('x-brand-id') ?? 'act60review'
     const brand = getBrandFromId(brandId)
 
-    if (!tier || !['basic', 'comprehensive', 'defense', 'premium', 'enterprise'].includes(tier)) {
+    // Map old tier IDs to new 3-tier structure for backward compatibility
+    const tierMapping: Record<string, string> = {
+      premium: 'enterprise',
+      defense: 'comprehensive',
+    }
+    const mappedTier = tierMapping[tier] ?? tier
+
+    if (!mappedTier || !['basic', 'comprehensive', 'defense', 'premium', 'enterprise'].includes(tier)) {
       return NextResponse.json(
         { error: 'Invalid tier selected' },
         { status: 400 }
       )
     }
 
-    const selectedTier = brand.tiers.find((t) => t.id === tier)
+    const selectedTier = brand.tiers.find((t) => t.id === mappedTier)
     if (!selectedTier) {
       return NextResponse.json(
         { error: 'Invalid pricing configuration' },

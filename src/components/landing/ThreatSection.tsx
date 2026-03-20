@@ -110,7 +110,22 @@ function AnimatedNumber({ value, suffix = '' }: { value: string; suffix?: string
   return <div ref={ref}>{display}</div>
 }
 
-export default function ThreatSection() {
+interface ThreatSectionProps {
+  brand?: { id: string; tier: string }
+}
+
+export default function ThreatSection({ brand }: ThreatSectionProps) {
+  const sectionTitle = brand?.tier === 'defense'
+    ? 'Why You Need a Shield'
+    : brand?.tier === 'diy'
+    ? 'Why You Should Check Now'
+    : 'The IRS Is Not Bluffing'
+
+  const sectionSubtitle = brand?.tier === 'defense'
+    ? 'IRS Campaign 685 is actively targeting decree holders. These numbers explain why audit defense matters.'
+    : brand?.tier === 'diy'
+    ? 'A quick scan today could prevent a six-figure assessment tomorrow.'
+    : 'Every number below is from government reports. This is the reality Act 60 holders face today.'
   return (
     <section className="relative py-28 bg-navy-800/50 noise">
       <div className="section-line" />
@@ -130,10 +145,10 @@ export default function ThreatSection() {
             The Enforcement Landscape
           </p>
           <h2 className="font-serif text-4xl sm:text-5xl text-slate-100 mb-5 tracking-tight">
-            The IRS Is Not Bluffing
+            {sectionTitle}
           </h2>
           <p className="text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Every number below is from government reports. This is the reality Act 60 holders face today.
+            {sectionSubtitle}
           </p>
         </motion.div>
 

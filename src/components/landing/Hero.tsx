@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, AlertTriangle } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
+import GuaranteeBadge from '@/components/ui/GuaranteeBadge'
 
 interface HeroProps {
   brand: BrandConfig
@@ -158,18 +159,29 @@ export default function Hero({ brand }: HeroProps) {
             </a>
           </motion.div>
 
+          {/* Guarantee badge */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.7 }}
+            className="mt-8"
+          >
+            <GuaranteeBadge size="md" />
+          </motion.div>
+
           {/* Trust badges */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-14 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500 uppercase tracking-[0.12em]"
+            className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500 uppercase tracking-[0.12em]"
           >
-            <span>CPA-Verified</span>
-            <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
-            <span>SOC 2 Compliant</span>
-            <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
-            <span>256-bit Encryption</span>
+            {brand.trustBadges.map((badge, i) => (
+              <span key={badge} className="flex items-center gap-5">
+                {i > 0 && <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />}
+                <span>{badge}</span>
+              </span>
+            ))}
           </motion.div>
         </div>
       </div>

@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Loader2 } from 'lucide-react'
+import { ArrowRight, Loader2, Check, X } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
+import GuaranteeBadge from '@/components/ui/GuaranteeBadge'
 
 interface PricingProps {
   brand: BrandConfig
@@ -11,6 +12,9 @@ interface PricingProps {
 
 export default function Pricing({ brand }: PricingProps) {
   const [loadingTier, setLoadingTier] = useState<string | null>(null)
+
+  // Reverse order: highest tier first (anchor high), then popular, then lowest
+  const displayTiers = [...brand.tiers].reverse()
 
   async function handleCheckout(tierId: string) {
     setLoadingTier(tierId)
@@ -24,12 +28,38 @@ export default function Pricing({ brand }: PricingProps) {
       if (data.url) {
         window.location.href = data.url
       } else {
-        console.error('Checkout error:', data.error)
         setLoadingTier(null)
       }
-    } catch (err) {
-      console.error('Checkout failed:', err)
+    } catch {
       setLoadingTier(null)
+    }
+  }
+
+  // Build feature matrix from all tiers
+  const allFeatures = new Map<string, Map<string, boolean>>()
+  for (const tier of brand.tiers) {
+    for (const feature of tier.features) {
+      if (feature.startsWith('Everything in ')) continue
+      if (!allFeatures.has(feature)) {
+        allFeatures.set(feature, new Map())
+      }
+    }
+  }
+
+  // Mark which tiers have which features (cumulative)
+  for (const tier of brand.tiers) {
+    const tierFeatures = new Set<string>()
+    for (const t of brand.tiers) {
+      if (t.price <= tier.price) {
+        for (const f of t.features) {
+          if (!f.startsWith('Everything in ')) {
+            tierFeatures.add(f)
+          }
+        }
+      }
+    }
+    for (const [feature, tierMap] of allFeatures) {
+      tierMap.set(tier.id, tierFeatures.has(feature))
     }
   }
 
@@ -83,13 +113,15 @@ export default function Pricing({ brand }: PricingProps) {
               </div>
             ))}
           </div>
+          {/* Alt cost frame */}
+          <p className="mt-6 text-sm text-accent/70 font-medium">
+            {brand.altCostFrame}
+          </p>
         </motion.div>
 
-        {/* Pricing cards */}
-        <div className={`grid grid-cols-1 gap-px bg-white/[0.04] border border-white/[0.04] max-w-6xl mx-auto overflow-hidden ${
-          brand.tiers.length <= 3 ? 'md:grid-cols-3 max-w-5xl' : brand.tiers.length <= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
-        }`}>
-          {brand.tiers.map((tier, index) => (
+        {/* Pricing cards - reversed order (highest first) */}
+        <div className={`grid grid-cols-1 gap-px bg-white/[0.04] border border-white/[0.04] max-w-5xl mx-auto overflow-hidden md:grid-cols-3`}>
+          {displayTiers.map((tier, index) => (
             <motion.div
               key={tier.id}
               initial={{ opacity: 0, y: 30 }}
@@ -121,47 +153,123 @@ export default function Pricing({ brand }: PricingProps) {
                 <span className="text-slate-600 ml-2 text-sm">one-time</span>
               </div>
 
-              <ul className="space-y-2.5 mb-8 flex-1">
+              <ul className="space-y-2.5 mb-4 flex-1">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2 text-sm text-slate-400">
-                    <span className={`mt-1.5 w-1 h-1 rounded-full shrink-0 ${
-                      tier.popular ? 'bg-accent/60' : 'bg-slate-600'
+                    <Check className={`mt-0.5 w-3.5 h-3.5 shrink-0 ${
+                      tier.popular ? 'text-accent/60' : 'text-slate-600'
                     }`} />
                     {feature}
                   </li>
                 ))}
               </ul>
 
-              <button
-                onClick={() => handleCheckout(tier.id)}
-                disabled={loadingTier !== null}
-                className={`group flex items-center justify-center gap-2 w-full py-3.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 disabled:opacity-60 ${
-                  tier.popular
-                    ? 'bg-accent text-navy-900 hover:bg-accent-light'
-                    : 'border border-white/[0.06] text-slate-300 hover:text-slate-100 hover:border-white/[0.12]'
-                }`}
-              >
-                {loadingTier === tier.id ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  <>
-                    {tier.cta}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                  </>
-                )}
-              </button>
+              {/* What's NOT included */}
+              {tier.excludes.length > 0 && (
+                <ul className="space-y-1.5 mb-6 border-t border-white/[0.04] pt-4">
+                  {tier.excludes.map((excluded) => (
+                    <li key={excluded} className="flex items-start gap-2 text-xs text-slate-600">
+                      <X className="mt-0.5 w-3 h-3 shrink-0 text-slate-700" />
+                      {excluded}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              <div className="mt-auto space-y-3">
+                <button
+                  onClick={() => handleCheckout(tier.id)}
+                  disabled={loadingTier !== null}
+                  className={`group flex items-center justify-center gap-2 w-full py-3.5 text-sm font-semibold tracking-wide uppercase transition-all duration-300 disabled:opacity-60 ${
+                    tier.popular
+                      ? 'bg-accent text-navy-900 hover:bg-accent-light'
+                      : 'border border-white/[0.06] text-slate-300 hover:text-slate-100 hover:border-white/[0.12]'
+                  }`}
+                >
+                  {loadingTier === tier.id ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      {tier.cta}
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                    </>
+                  )}
+                </button>
+                <div className="flex justify-center">
+                  <GuaranteeBadge />
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Feature comparison matrix */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="mt-16 max-w-5xl mx-auto overflow-x-auto"
+        >
+          <h3 className="font-serif text-2xl text-slate-100 mb-6 text-center tracking-tight">
+            Feature Comparison
+          </h3>
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b border-white/[0.06]">
+                <th className="text-left text-xs text-slate-500 uppercase tracking-wider py-3 pr-4 font-medium">Feature</th>
+                {brand.tiers.map((tier) => (
+                  <th key={tier.id} className={`text-center text-xs uppercase tracking-wider py-3 px-2 font-medium ${tier.popular ? 'text-accent' : 'text-slate-500'}`}>
+                    {tier.name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from(allFeatures.entries()).map(([feature, tierMap]) => (
+                <tr key={feature} className="border-b border-white/[0.03]">
+                  <td className="text-sm text-slate-400 py-2.5 pr-4">{feature}</td>
+                  {brand.tiers.map((tier) => (
+                    <td key={tier.id} className="text-center py-2.5 px-2">
+                      {tierMap.get(tier.id) ? (
+                        <Check className="w-4 h-4 text-accent/60 mx-auto" />
+                      ) : (
+                        <X className="w-4 h-4 text-slate-700 mx-auto" />
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </motion.div>
+
+        {/* Not sure CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="text-center mt-12"
+        >
+          <p className="text-sm text-slate-500 mb-3">
+            Not sure which tier is right for you?
+          </p>
+          <a
+            href={brand.consultationUrl}
+            className="inline-flex items-center gap-2 text-accent text-sm font-medium hover:text-accent-light transition-colors"
+          >
+            Get a free consultation
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.1 }}
-          className="text-center mt-10 text-sm text-slate-600"
+          className="text-center mt-8 text-sm text-slate-600"
         >
           100% money-back guarantee. No questions asked within 7 days.
         </motion.p>

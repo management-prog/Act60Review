@@ -239,22 +239,30 @@ export default async function SeoPage({ params }: PageProps) {
             </a>
           </section>
 
-          {/* Cross-site links */}
+          {/* Cross-site links — revenue ladder */}
           {crossSiteLinks.length > 0 && (
-            <section className="mt-12 flex flex-col sm:flex-row gap-3">
-              {crossSiteLinks.map((link) => (
-                <a
-                  key={link.domain}
-                  href={`https://${link.domain}/${link.targetSlug}`}
-                  className="flex-1 p-4 border border-white/[0.05] hover:border-accent/20 transition-colors group"
-                  rel="noopener"
-                >
-                  <span className="text-xs text-slate-600 uppercase tracking-wider">{link.name}</span>
-                  <span className="block text-sm text-slate-400 group-hover:text-accent transition-colors mt-1">
-                    {link.label} &rarr;
-                  </span>
-                </a>
-              ))}
+            <section className="mt-12">
+              <p className="text-xs text-slate-500 uppercase tracking-[0.15em] font-medium mb-4">
+                The Complete Protection Stack
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                {crossSiteLinks.map((link) => (
+                  <a
+                    key={link.domain}
+                    href={`https://${link.domain}/${link.targetSlug}`}
+                    className="flex-1 p-5 border border-white/[0.05] hover:border-accent/20 bg-accent/[0.01] hover:bg-accent/[0.03] transition-all duration-300 group"
+                    rel="noopener"
+                  >
+                    <span className="text-xs text-accent/60 uppercase tracking-wider font-medium">{link.name}</span>
+                    <span className="block text-sm text-slate-300 group-hover:text-accent transition-colors mt-1 font-medium">
+                      {link.label} &rarr;
+                    </span>
+                    <span className="block text-xs text-slate-600 mt-1">
+                      {link.domain === 'decreecheck.com' ? 'From $149' : link.domain === 'act60review.com' ? 'From $299' : 'From $799'}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </section>
           )}
 
