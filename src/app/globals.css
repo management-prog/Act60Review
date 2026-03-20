@@ -72,9 +72,11 @@
   --animate-pulse-subtle: pulse-subtle 2s ease-in-out infinite;
 }
 
-/* Smooth scroll */
-html {
+/* Smooth scroll + prevent horizontal overflow on mobile */
+html,
+body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */

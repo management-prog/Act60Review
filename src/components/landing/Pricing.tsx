@@ -69,7 +69,7 @@ export default function Pricing({ brand }: PricingProps) {
           <p className="text-sm text-slate-500 mb-4">
             What decree holders currently pay:
           </p>
-          <div className="flex justify-center gap-10">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-10">
             {[
               { price: '$5,000', label: 'Mid-tier CPA' },
               { price: '$15,000', label: 'Specialist Firm' },
@@ -86,7 +86,7 @@ export default function Pricing({ brand }: PricingProps) {
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] max-w-5xl mx-auto overflow-hidden">
           {brand.tiers.map((tier, index) => (
             <motion.div
               key={tier.id}

@@ -104,7 +104,7 @@ export default function Footer({ brand }: FooterProps) {
           <p className="text-xs text-slate-700">
             &copy; {new Date().getFullYear()} Dis Optimus Capital LLC
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             {['CPA-Verified', 'SOC 2', '256-bit Encryption'].map((badge) => (
               <span key={badge} className="text-[10px] text-slate-600 uppercase tracking-[0.08em]">
                 {badge}

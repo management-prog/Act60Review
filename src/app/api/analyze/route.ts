@@ -223,7 +223,7 @@ export async function POST(request: NextRequest) {
     const anthropic = getAnthropic()
 
     const stream = anthropic.messages.stream({
-      model: 'claude-sonnet-4-6-20250514',
+      model: 'claude-sonnet-4-5-20241022',
       max_tokens: verifiedTier === 'defense' ? 16384 : verifiedTier === 'comprehensive' ? 12288 : 4096,
       system: SYSTEM_PROMPT,
       messages: [{ role: 'user', content: contentBlocks }],

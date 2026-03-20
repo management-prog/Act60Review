@@ -138,7 +138,7 @@ export default function ThreatSection() {
         </motion.div>
 
         {/* Threat grid — editorial style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] overflow-hidden">
           {threats.map((threat, index) => (
             <motion.div
               key={threat.label}

@@ -83,9 +83,9 @@ export default function WhatWeCatch() {
                 transition={{ delay: index * 0.06 }}
                 className="bg-navy-900 p-7 hover:bg-white/[0.01] transition-colors duration-300"
               >
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
                   <h3 className="text-base font-semibold text-slate-100">{cat.title}</h3>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 border uppercase tracking-[0.1em] ${style.border} ${style.text} ${style.bg}`}>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 border uppercase tracking-[0.1em] shrink-0 ${style.border} ${style.text} ${style.bg}`}>
                     {cat.severity}
                   </span>
                 </div>

@@ -83,8 +83,8 @@ export default function Hero({ brand }: HeroProps) {
 
       {/* Threat ticker */}
       <div className="relative z-10 border-b border-red-900/20 bg-red-950/10 backdrop-blur-sm py-2.5">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
-          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-red-500/15 pulse-ring">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 overflow-hidden">
+          <span className="flex items-center justify-center w-5 h-5 shrink-0 rounded-full bg-red-500/15 pulse-ring">
             <AlertTriangle className="w-3 h-3 text-red-400" />
           </span>
           <AnimatePresence mode="wait">
@@ -94,7 +94,7 @@ export default function Hero({ brand }: HeroProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3 }}
-              className="text-sm text-red-300/80 font-medium tracking-wide"
+              className="text-xs sm:text-sm text-red-300/80 font-medium tracking-wide min-w-0"
             >
               {tickerItems[tickerIndex]}
             </motion.p>
@@ -120,7 +120,7 @@ export default function Hero({ brand }: HeroProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.08] mb-8 text-slate-100"
+            className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal tracking-[-0.02em] leading-[1.08] mb-8 text-slate-100"
           >
             {brand.heroHeadline}{' '}
             <em className="text-accent italic">{brand.heroHighlight}</em>
@@ -163,7 +163,7 @@ export default function Hero({ brand }: HeroProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.8 }}
-            className="mt-14 flex items-center gap-5 text-xs text-slate-500 uppercase tracking-[0.12em]"
+            className="mt-14 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500 uppercase tracking-[0.12em]"
           >
             <span>CPA-Verified</span>
             <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
