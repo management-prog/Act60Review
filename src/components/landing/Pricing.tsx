@@ -86,7 +86,9 @@ export default function Pricing({ brand }: PricingProps) {
         </motion.div>
 
         {/* Pricing cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] max-w-5xl mx-auto overflow-hidden">
+        <div className={`grid grid-cols-1 gap-px bg-white/[0.04] border border-white/[0.04] max-w-6xl mx-auto overflow-hidden ${
+          brand.tiers.length <= 3 ? 'md:grid-cols-3 max-w-5xl' : brand.tiers.length <= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'
+        }`}>
           {brand.tiers.map((tier, index) => (
             <motion.div
               key={tier.id}
