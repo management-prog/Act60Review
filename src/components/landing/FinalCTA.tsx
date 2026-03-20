@@ -20,12 +20,12 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
         >
-          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-slate-100 mb-5 tracking-tight leading-[1.1]">
+          <h2 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-slate-100 mb-5 tracking-tight leading-[1.1]">
             The Cost of Not Knowing
-            <br />
-            Is <em className="text-red-400 italic">$287,000</em>
+            <br className="hidden sm:block" />
+            {' '}Is <em className="text-red-400 italic">$287,000</em>
           </h2>
           <p className="text-lg text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">
             That&apos;s the average IRS deficiency for Act 60 holders. A review
@@ -40,7 +40,7 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
 
-          <div className="mt-8 flex items-center justify-center gap-5 text-xs text-slate-500 uppercase tracking-[0.12em]">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500 uppercase tracking-[0.12em]">
             <span>CPA-Verified</span>
             <span className="w-[3px] h-[3px] rounded-full bg-slate-700" />
             <span>SOC 2 Compliant</span>

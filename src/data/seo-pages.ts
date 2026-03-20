@@ -26,11 +26,17 @@ export function getSeoPage(brandId: string, slug: string): SeoPage | null {
   return pages.find((p) => p.slug === slug) ?? null
 }
 
-export function getAllSlugs(): string[] {
-  const pages = pagesByBrand.act60review
+export function getAllSlugs(brandId: string = 'act60review'): string[] {
+  const pages = pagesByBrand[brandId] ?? pagesByBrand.act60review
   return pages.map((p) => p.slug)
 }
 
 export function getAllSeoPages(brandId: string): SeoPage[] {
   return pagesByBrand[brandId] ?? pagesByBrand.act60review
+}
+
+export function getPageTitle(brandId: string, slug: string): string {
+  const page = getSeoPage(brandId, slug)
+  if (page) return page.title
+  return slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }

@@ -22,6 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${brand.name} | ${brand.tagline}`,
     description: brand.description,
     keywords: 'Act 60, Puerto Rico tax review, Act 60 compliance, IRS Campaign 685, decree holder tax, PR tax return review, AI tax review',
+    alternates: {
+      canonical: `https://${brand.domain}`,
+    },
     openGraph: {
       title: `${brand.name} | ${brand.tagline}`,
       description: brand.description,
@@ -46,7 +49,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark" data-brand={brand.id}>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-navy-900 text-slate-100`}>
-        <JsonLd />
+        <JsonLd brand={brand} />
         {children}
       </body>
     </html>

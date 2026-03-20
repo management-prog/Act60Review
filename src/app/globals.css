@@ -72,9 +72,11 @@
   --animate-pulse-subtle: pulse-subtle 2s ease-in-out infinite;
 }
 
-/* Smooth scroll */
-html {
+/* Smooth scroll + prevent horizontal overflow on mobile */
+html,
+body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
@@ -306,6 +308,14 @@ html {
   --sidebar-accent-foreground: #f1f5f9;
   --sidebar-border: rgba(255, 255, 255, 0.06);
   --sidebar-ring: #C9A96E;
+}
+
+/* Ensure content visible even if JS/animations fail */
+@media (prefers-reduced-motion: reduce) {
+  [style*="opacity: 0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @layer base {

@@ -123,7 +123,7 @@ export default function ThreatSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1 }}
           className="text-center mb-16"
         >
           <p className="text-red-400/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
@@ -138,17 +138,17 @@ export default function ThreatSection() {
         </motion.div>
 
         {/* Threat grid — editorial style */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] border border-white/[0.04] overflow-hidden">
           {threats.map((threat, index) => (
             <motion.div
               key={threat.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: index * 0.08 }}
               className="bg-navy-900 p-8 hover:bg-white/[0.01] transition-colors duration-300"
             >
-              <div className={`font-serif text-4xl tracking-tight mb-1 ${threat.color}`}>
+              <div className={`font-sans text-4xl font-bold tracking-tight mb-1 ${threat.color}`}>
                 <AnimatedNumber value={threat.stat} />
               </div>
               <p className="text-xs font-semibold text-red-400/70 uppercase tracking-[0.1em] mb-3">

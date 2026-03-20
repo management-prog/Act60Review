@@ -6,6 +6,9 @@ export async function generateMetadata() {
   return {
     title: `Disclaimer | ${brand.name}`,
     description: `Legal disclaimer for ${brand.name}, operated by Dis Optimus Capital LLC.`,
+    alternates: {
+      canonical: `https://${brand.domain}/disclaimer`,
+    },
   }
 }
 

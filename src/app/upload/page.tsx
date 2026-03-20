@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useEffect } from 'react'
+import { Suspense, useState, useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Upload, FileText, X, Shield, ArrowRight, Loader2, CheckCircle, Lock } from 'lucide-react'
@@ -27,6 +27,14 @@ const fileLabels: Record<string, string> = {
 }
 
 export default function UploadPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-950" />}>
+      <UploadPageContent />
+    </Suspense>
+  )
+}
+
+function UploadPageContent() {
   const brand = getBrandConfig()
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')

@@ -1,37 +1,67 @@
-import Script from 'next/script'
+import type { BrandConfig } from '@/config/brands'
 
-const schemaData = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Act 60 Review',
-  applicationCategory: 'FinanceApplication',
-  operatingSystem: 'Web',
-  description: 'AI-powered tax return review for Puerto Rico Act 60 decree holders.',
-  offers: {
-    '@type': 'AggregateOffer',
-    lowPrice: '299',
-    highPrice: '1499',
-    priceCurrency: 'USD',
-  },
-  provider: {
-    '@type': 'Organization',
-    name: 'Dis Optimus Capital LLC',
-    address: {
-      '@type': 'PostalAddress',
-      addressRegion: 'PR',
-      addressCountry: 'US',
-    },
-  },
+interface JsonLdProps {
+  brand: BrandConfig
 }
 
-export function JsonLd() {
+export function JsonLd({ brand }: JsonLdProps) {
+  const schemaData = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': `https://${brand.domain}/#organization`,
+        name: 'Dis Optimus Capital LLC',
+        url: `https://${brand.domain}`,
+        logo: `https://${brand.domain}/favicon.ico`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'San Juan',
+          addressRegion: 'PR',
+          addressCountry: 'US',
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          email: `support@${brand.domain}`,
+          contactType: 'customer service',
+        },
+        sameAs: [
+          'https://act60review.com',
+          'https://decreecheck.com',
+          'https://act60shield.com',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `https://${brand.domain}/#website`,
+        url: `https://${brand.domain}`,
+        name: brand.name,
+        description: brand.description,
+        publisher: { '@id': `https://${brand.domain}/#organization` },
+      },
+      {
+        '@type': 'SoftwareApplication',
+        name: brand.name,
+        applicationCategory: 'FinanceApplication',
+        operatingSystem: 'Web',
+        description: brand.description,
+        offers: {
+          '@type': 'AggregateOffer',
+          lowPrice: String(brand.tiers[0].price),
+          highPrice: String(brand.tiers[brand.tiers.length - 1].price),
+          priceCurrency: 'USD',
+        },
+        provider: { '@id': `https://${brand.domain}/#organization` },
+      },
+    ],
+  }
+
+  // Content is derived from trusted brand config, not user input
   return (
-    <Script
+    <script
       id="json-ld"
       type="application/ld+json"
-      strategy="afterInteractive"
-    >
-      {JSON.stringify(schemaData)}
-    </Script>
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
   )
 }

@@ -622,7 +622,6 @@
     ],
     "ctaText": "Check My Return",
     "relatedSlugs": [
-      "act-60-day-traders",
       "act-60-compliance-checklist-2026",
       "act-60-common-filing-mistakes",
       "act-60-capital-gains-tax",
@@ -874,15 +873,15 @@
     "sections": [
       {
         "heading": "What is Depreciation Recapture and Why Does It Matter?",
-        "text": "Depreciation lets you deduct the cost of an asset over time. But when you sell that asset for a profit, the government wants some of that tax benefit back. This is called \"depreciation recapture.\" It means a portion of your gain, equal to the depreciation you claimed, is taxed as ordinary income, not as a lower-rate capital gain. For Act 60 holders, this is a critical distinction. The 0% capital gains tax rate you enjoy doesn't apply to recaptured depreciation. Ignoring this can lead to a surprise tax bill and penalties. Our platform is designed to quickly scan your sales and depreciation data to flag potential recapture amounts, giving you a clear picture of your tax situation instantly. The growth in AI-powered compliance tools shows that decree holders are tired of waiting weeks for answers from traditional firms.\n\nMost business assets, from computers to machinery, fall under these rules. Even certain real estate transactions can trigger recapture. The problem is that many decree holders, especially those new to the island, overlook these rules. They assume all gains are covered by their decree. This is a dangerous and costly assumption. A quick check can save you thousands in the long run. Our tool is designed to give you that peace of mind without the high cost and long wait times associated with old-school CPA reviews, which can cost upwards of $5,000."
+        "content": "Depreciation lets you deduct the cost of an asset over time. But when you sell that asset for a profit, the government wants some of that tax benefit back. This is called \"depreciation recapture.\" It means a portion of your gain, equal to the depreciation you claimed, is taxed as ordinary income, not as a lower-rate capital gain. For Act 60 holders, this is a critical distinction. The 0% capital gains tax rate you enjoy doesn't apply to recaptured depreciation. Ignoring this can lead to a surprise tax bill and penalties. Our platform is designed to quickly scan your sales and depreciation data to flag potential recapture amounts, giving you a clear picture of your tax situation instantly. The growth in AI-powered compliance tools shows that decree holders are tired of waiting weeks for answers from traditional firms.\n\nMost business assets, from computers to machinery, fall under these rules. Even certain real estate transactions can trigger recapture. The problem is that many decree holders, especially those new to the island, overlook these rules. They assume all gains are covered by their decree. This is a dangerous and costly assumption. A quick check can save you thousands in the long run. Our tool is designed to give you that peace of mind without the high cost and long wait times associated with old-school CPA reviews, which can cost upwards of $5,000."
       },
       {
         "heading": "The Difference Between Section 1245 and 1250 Property",
-        "text": "The two main categories you need to know are Section 1245 and Section 1250 property. Think of Section 1245 as your business equipment—things like vehicles, furniture, and machinery. When you sell these items, the recapture rule is strict: any gain up to the amount of depreciation you took is taxed as ordinary income. It's a full clawback. DecreeCheck's algorithm is designed to instantly identify these assets and calculate the potential recapture, so you know exactly where you stand.\n\nSection 1250 property is real estate, like an office building or a rental unit. The rules here are a bit more relaxed but still tricky. Recapture on real estate generally only applies to depreciation taken in excess of the straight-line method. Since most property after 1986 uses straight-line, this is less common. However, there's a catch called \"unrecaptured Section 1250 gain,\" which is taxed at a special 25% rate for U.S. purposes. You need to know how Puerto Rico treats this. Don't get bogged down in the details; let our tool do the heavy lifting and check your real estate sales for these hidden traps in minutes."
+        "content": "The two main categories you need to know are Section 1245 and Section 1250 property. Think of Section 1245 as your business equipment—things like vehicles, furniture, and machinery. When you sell these items, the recapture rule is strict: any gain up to the amount of depreciation you took is taxed as ordinary income. It's a full clawback. DecreeCheck's algorithm is designed to instantly identify these assets and calculate the potential recapture, so you know exactly where you stand.\n\nSection 1250 property is real estate, like an office building or a rental unit. The rules here are a bit more relaxed but still tricky. Recapture on real estate generally only applies to depreciation taken in excess of the straight-line method. Since most property after 1986 uses straight-line, this is less common. However, there's a catch called \"unrecaptured Section 1250 gain,\" which is taxed at a special 25% rate for U.S. purposes. You need to know how Puerto Rico treats this. Don't get bogged down in the details; let our tool do the heavy lifting and check your real estate sales for these hidden traps in minutes."
       },
       {
         "heading": "PR vs. US Rules: Don't Get Caught in the Middle",
-        "text": "As an Act 60 resident, you're in a unique position, straddling both U.S. and Puerto Rico tax systems. This is where things get complicated. The asset's location and where the income is sourced determine which country's rules apply. Selling a U.S.-based asset might trigger U.S. recapture rules, even if you're a bona fide resident of Puerto Rico. Selling a PR-based asset falls under Hacienda's rules. The two are not identical. This complexity is a major reason why the GAO (GAO-26-107225) and the IRS are scrutinizing Act 60 returns.\n\nAre you sure your tax preparer got the sourcing rules right? An error here could mean paying tax to the wrong government or, worse, not paying tax when it was due. DecreeCheck is designed to help identify these cross-jurisdictional conflicts. By uploading your information, you can get an instant check on how your asset sales are likely to be viewed by both the IRS and Hacienda. It’s a simple step to avoid a massive headache later."
+        "content": "As an Act 60 resident, you're in a unique position, straddling both U.S. and Puerto Rico tax systems. This is where things get complicated. The asset's location and where the income is sourced determine which country's rules apply. Selling a U.S.-based asset might trigger U.S. recapture rules, even if you're a bona fide resident of Puerto Rico. Selling a PR-based asset falls under Hacienda's rules. The two are not identical. This complexity is a major reason why the GAO (GAO-26-107225) and the IRS are scrutinizing Act 60 returns.\n\nAre you sure your tax preparer got the sourcing rules right? An error here could mean paying tax to the wrong government or, worse, not paying tax when it was due. DecreeCheck is designed to help identify these cross-jurisdictional conflicts. By uploading your information, you can get an instant check on how your asset sales are likely to be viewed by both the IRS and Hacienda. It’s a simple step to avoid a massive headache later."
       }
     ],
     "faqItems": [
@@ -909,11 +908,11 @@
     ],
     "ctaText": "Check My Return",
     "relatedSlugs": [
-      "act-60-capital-gains-tax`",
-      "`act-60-real-estate-gains`",
-      "`act-60-pre-move-appreciation`",
-      "`act-60-common-filing-mistakes`",
-      "`act-60-planilla-guide"
+      "act-60-capital-gains-tax",
+      "act-60-real-estate-gains",
+      "act-60-pre-move-appreciation",
+      "act-60-common-filing-mistakes",
+      "act-60-planilla-guide"
     ],
     "disclaimer": "This content is for informational purposes only and does not constitute tax, legal, or accounting advice."
   },
@@ -921,15 +920,15 @@
     "sections": [
       {
         "heading": "What is the AMT and Why Does It Matter for Act 60?** The AMT is a separate tax calculation that can affect anyone, including Act 60 beneficiaries. It's designed to make sure everyone pays their fair share. For you, this means that even with your tax-exempt income from Puerto Rico, certain deductions or income types can still put you in the AMT zone. Our tool quickly scans for these red flags.",
-        "text": ""
+        "content": ""
       },
       {
         "heading": "Key AMT Triggers to Watch For",
-        "text": "The most common triggers for the AMT include exercising incentive stock options (ISOs), large capital gains, and certain tax-exempt interest. If you've had any of these, you could be at risk. DecreeCheck.com's automated system is designed to quickly identify these potential issues, so you can take action before it's too late."
+        "content": "The most common triggers for the AMT include exercising incentive stock options (ISOs), large capital gains, and certain tax-exempt interest. If you've had any of these, you could be at risk. DecreeCheck.com's automated system is designed to quickly identify these potential issues, so you can take action before it's too late."
       },
       {
         "heading": "IRC 933 and Your AMT Risk",
-        "text": "While IRC Section 933 lets you exclude your Puerto Rico income, it doesn't make you immune to the AMT. Our platform helps you understand how this works in practice. We provide a simple, no-nonsense report that highlights your potential AMT risk, so you can have a more informed conversation with your tax advisor."
+        "content": "While IRC Section 933 lets you exclude your Puerto Rico income, it doesn't make you immune to the AMT. Our platform helps you understand how this works in practice. We provide a simple, no-nonsense report that highlights your potential AMT risk, so you can have a more informed conversation with your tax advisor."
       }
     ],
     "faqItems": [
@@ -2987,7 +2986,6 @@
     "heroIntro": "Don't wait weeks for answers about your Act 60 compliance. As a YouTuber or content creator, your income sources are unique and require a specialized check. Our automated platform is built to give you a fast, affordable, and clear picture of your compliance status. In minutes, you can identify potential red flags with your ad revenue, sponsorship deals, and IP income.",
     "ctaText": "Check My Return",
     "relatedSlugs": [
-      "- act-60-intellectual-property-income",
       "act-60-saas-revenue-sourcing",
       "act-60-passive-income-rules",
       "act-60-self-employment-tax",
