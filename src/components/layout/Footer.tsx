@@ -12,6 +12,12 @@ const protectionStack = [
   { id: 'act60shield', name: 'Act 60 Shield', domain: 'act60shield.com', desc: 'Audit defense + ongoing protection', price: 'From $799' },
 ]
 
+const directionalCopy: Record<string, { text: string; targetDomain: string }> = {
+  decreecheck: { text: 'Ready for deeper protection?', targetDomain: 'act60review.com' },
+  act60review: { text: 'Need audit defense?', targetDomain: 'act60shield.com' },
+  act60shield: { text: 'Know someone just starting?', targetDomain: 'decreecheck.com' },
+}
+
 export default function Footer({ brand }: FooterProps) {
   return (
     <footer className="bg-navy-950 border-t border-white/[0.04] py-14">
@@ -46,6 +52,15 @@ export default function Footer({ brand }: FooterProps) {
               )
             })}
           </div>
+          {directionalCopy[brand.id] && (
+            <a
+              href={`https://${directionalCopy[brand.id].targetDomain}`}
+              className="block text-center mt-4 text-sm text-slate-500 hover:text-accent transition-colors duration-200"
+              rel="noopener"
+            >
+              {directionalCopy[brand.id].text} &rarr;
+            </a>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-10">

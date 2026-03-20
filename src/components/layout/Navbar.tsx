@@ -65,7 +65,7 @@ export default function Navbar({ brand }: NavbarProps) {
               href="#pricing"
               className="group inline-flex items-center gap-2 text-accent text-[13px] font-semibold tracking-[0.08em] uppercase border border-accent/25 px-5 py-2.5 hover:bg-accent/[0.06] hover:border-accent/40 transition-all duration-300"
             >
-              Start Review
+              {brand.ctaText}
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
@@ -106,7 +106,7 @@ export default function Navbar({ brand }: NavbarProps) {
                     onClick={() => setMobileOpen(false)}
                     className="block text-center bg-accent text-navy-900 font-semibold text-sm px-5 py-3 tracking-wide uppercase"
                   >
-                    Start Review
+                    {brand.ctaText}
                   </a>
                 </div>
               </div>

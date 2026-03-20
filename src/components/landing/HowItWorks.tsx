@@ -70,13 +70,19 @@ export default function HowItWorks({ brand }: HowItWorksProps) {
               transition={{ delay: index * 0.12 }}
               className="relative px-4 sm:px-6 lg:px-8 py-8 text-center lg:text-left"
             >
-              {/* Vertical divider between steps */}
+              {/* Dashed connector line between steps — lg+ only */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-6 right-0 w-px h-16 bg-gradient-to-b from-white/[0.06] to-transparent" />
+                <div className="hidden lg:block absolute top-10 right-0 translate-x-1/2 w-8 z-10">
+                  <div className="flex items-center">
+                    <span className="w-2 h-2 rounded-full bg-accent/50 shrink-0" />
+                    <span className="flex-1 border-t border-dashed border-accent/25" />
+                    <span className="w-2 h-2 rounded-full bg-accent/50 shrink-0" />
+                  </div>
+                </div>
               )}
 
               {/* Step number */}
-              <p className="font-serif text-5xl text-accent/[0.08] mb-4">{step.number}</p>
+              <p className="font-serif text-5xl text-accent/[0.12] mb-4">{step.number}</p>
 
               <h3 className="font-sans text-base font-semibold text-slate-100 mb-2 tracking-tight">
                 {step.title}

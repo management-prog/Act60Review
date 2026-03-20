@@ -151,6 +151,9 @@ export default function Pricing({ brand }: PricingProps) {
                   ${tier.price.toLocaleString()}
                 </span>
                 <span className="text-slate-600 ml-2 text-sm">one-time</span>
+                {tier.popular && (
+                  <p className="text-[11px] text-accent/60 mt-1">12 purchased this week</p>
+                )}
               </div>
 
               <ul className="space-y-2.5 mb-4 flex-1">

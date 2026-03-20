@@ -9,7 +9,19 @@ interface FinalCTAProps {
   brand: BrandConfig
 }
 
+function getDaysUntilDeadline(): number {
+  const now = new Date()
+  const currentYear = now.getFullYear()
+  const april15 = new Date(currentYear, 3, 15)
+  if (now > april15) {
+    const nextApril15 = new Date(currentYear + 1, 3, 15)
+    return Math.ceil((nextApril15.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+  }
+  return Math.ceil((april15.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+}
+
 export default function FinalCTA({ brand }: FinalCTAProps) {
+  const daysLeft = getDaysUntilDeadline()
   return (
     <section className="relative py-32 bg-navy-900 overflow-hidden noise">
       <div className="section-line" />
@@ -36,6 +48,10 @@ export default function FinalCTA({ brand }: FinalCTAProps) {
           {/* Alt cost frame */}
           <p className="text-sm text-accent/80 font-medium mb-10">
             {brand.altCostFrame}
+          </p>
+
+          <p className="text-xs text-red-400/60 mb-3">
+            Filing deadline is {daysLeft} days away
           </p>
 
           <a

@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const categories = [
   {
@@ -8,36 +9,54 @@ const categories = [
     severity: 'critical' as const,
     description: 'Incorrect exclusion calculations, missing elections, improperly sourced income.',
     example: 'Investment income before residency claimed as excluded.',
+    irsCode: 'IRC \u00a7933, \u00a7937(a)',
+    penalty: 'Penalty: 20\u201375% of underpayment',
+    howWeCatch: 'Cross-references income sourcing against residency start date, verifies election filings, and flags income types ineligible for exclusion.',
   },
   {
     title: 'Transfer Pricing Red Flags',
     severity: 'critical' as const,
     description: 'Intercompany transactions not at arm\'s length, missing documentation.',
     example: 'S-Corp pays PR entity 90% of revenue as "services" \u2014 manufactured loss.',
+    irsCode: 'IRC \u00a7482, Treas. Reg. \u00a71.482-1',
+    penalty: 'Penalty: 20\u201340% of transfer pricing adjustment',
+    howWeCatch: 'Analyzes intercompany ratios against industry benchmarks, flags revenue concentrations above 70%, and checks for contemporaneous documentation.',
   },
   {
     title: 'FBAR & FATCA Gaps',
     severity: 'critical' as const,
     description: 'Missing FinCEN 114, incomplete Form 8938, unreported accounts.',
     example: 'Cayman trust not on FBAR \u2014 $100K+ penalty per year.',
+    irsCode: 'BSA \u00a75321, IRC \u00a76038D',
+    penalty: 'Penalty: $10K\u2013$100K+ per account per year (willful)',
+    howWeCatch: 'Maps disclosed accounts across FBAR, 8938, and 3520 filings to identify missing or inconsistent reporting.',
   },
   {
     title: 'Residency Test Failures',
     severity: 'high' as const,
     description: 'Insufficient presence days, missing closer connection documentation.',
     example: '187 days in PR but LinkedIn says "New York."',
+    irsCode: 'IRC \u00a7937(a), \u00a77701(b)',
+    penalty: 'Penalty: Full loss of Act 60 benefits + back taxes',
+    howWeCatch: 'Counts presence days from travel records, flags social media / voter registration inconsistencies, verifies tax home documentation.',
   },
   {
     title: 'Missing Forms',
     severity: 'high' as const,
     description: 'Absent schedules, wrong filing status, missing 480 series returns.',
     example: 'Form 480.6 EC not filed \u2014 tax treatment disallowed.',
+    irsCode: 'PR Code \u00a71062.08, Form 480 Series',
+    penalty: 'Penalty: Disallowance of preferential tax rate + penalties',
+    howWeCatch: 'Checks filing inventory against decree requirements, verifies 480.6 EC / 480.7 are filed with correct amounts.',
   },
   {
     title: 'Capital Gains Sourcing',
     severity: 'medium' as const,
     description: 'Pre-move appreciation, incorrect holding periods, wash sales.',
     example: 'Pre-2022 appreciation is NOT exempt under Act 60.',
+    irsCode: 'Act 60 \u00a72022.03(b), IRC \u00a71001',
+    penalty: 'Penalty: 15\u201320% federal capital gains tax on pre-move gains',
+    howWeCatch: 'Calculates FMV at residency date using historical price data, separates pre/post-move appreciation, flags wash sale violations.',
   },
 ]
 
@@ -52,6 +71,8 @@ interface WhatWeCatchProps {
 }
 
 export default function WhatWeCatch({ brand }: WhatWeCatchProps) {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+
   const sectionTitle = brand?.tier === 'defense'
     ? 'What Auditors Target'
     : brand?.tier === 'diy'
@@ -89,9 +110,11 @@ export default function WhatWeCatch({ brand }: WhatWeCatchProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/[0.04] border border-white/[0.04]">
           {categories.map((cat, index) => {
             const style = severityStyles[cat.severity]
+            const isExpanded = expandedIndex === index
             return (
               <motion.div
                 key={cat.title}
+                layout
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
@@ -112,6 +135,38 @@ export default function WhatWeCatch({ brand }: WhatWeCatchProps) {
                     &ldquo;{cat.example}&rdquo;
                   </p>
                 </div>
+
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-4 pt-4 border-t border-white/[0.04] space-y-2">
+                        <p className="text-xs text-accent/80 font-semibold tracking-wide">
+                          {cat.irsCode}
+                        </p>
+                        <p className="text-xs text-red-400/80 font-medium">
+                          {cat.penalty}
+                        </p>
+                        <p className="text-sm text-slate-400 leading-relaxed">
+                          <span className="text-slate-300 font-medium">How we catch it: </span>
+                          {cat.howWeCatch}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                <button
+                  onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                  className="mt-3 text-xs text-accent/70 hover:text-accent font-semibold tracking-wide uppercase transition-colors duration-200"
+                >
+                  {isExpanded ? 'Show less' : 'Learn more'}
+                </button>
               </motion.div>
             )
           })}

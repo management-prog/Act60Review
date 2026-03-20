@@ -11,6 +11,7 @@ import FAQ from '@/components/landing/FAQ'
 import CrossSellBanner from '@/components/landing/CrossSellBanner'
 import FinalCTA from '@/components/landing/FinalCTA'
 import Footer from '@/components/layout/Footer'
+import StickyMobileCTA from '@/components/layout/StickyMobileCTA'
 import LeadMagnetPopup from '@/components/landing/LeadMagnetPopup'
 
 export default async function Home() {
@@ -32,6 +33,7 @@ export default async function Home() {
         <FinalCTA brand={brand} />
       </main>
       <Footer brand={brand} />
+      <StickyMobileCTA brand={brand} />
       <LeadMagnetPopup brand={brand} />
     </>
   )

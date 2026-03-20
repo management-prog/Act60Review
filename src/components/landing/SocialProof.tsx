@@ -3,12 +3,23 @@
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
+import AnimatedNumber from '@/components/ui/AnimatedNumber'
 
 interface SocialProofProps {
   brand: BrandConfig
 }
 
+function parseClientCount(clientCount: string): { number: string; label: string } {
+  const match = clientCount.match(/^([\d,]+\+?)(.*)$/)
+  if (match) {
+    return { number: match[1].trim(), label: match[2].trim() }
+  }
+  return { number: '', label: clientCount }
+}
+
 export default function SocialProof({ brand }: SocialProofProps) {
+  const { number, label } = parseClientCount(brand.clientCount)
+
   return (
     <section className="relative py-20 bg-navy-900 noise">
       <div className="section-line" />
@@ -24,9 +35,16 @@ export default function SocialProof({ brand }: SocialProofProps) {
           <p className="text-accent/80 font-sans text-xs font-semibold uppercase tracking-[0.2em] mb-4">
             Trusted By Decree Holders
           </p>
-          <p className="font-serif text-2xl sm:text-3xl text-slate-100 tracking-tight">
-            {brand.clientCount}
-          </p>
+          <div className="font-serif text-2xl sm:text-3xl text-slate-100 tracking-tight flex items-baseline justify-center gap-2">
+            {number ? (
+              <>
+                <AnimatedNumber value={number} className="inline-block" />
+                <span>{label}</span>
+              </>
+            ) : (
+              <span>{brand.clientCount}</span>
+            )}
+          </div>
         </motion.div>
 
         {/* Testimonials */}

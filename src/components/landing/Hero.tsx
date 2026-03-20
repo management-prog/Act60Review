@@ -10,6 +10,13 @@ interface HeroProps {
   brand: BrandConfig
 }
 
+function getCurrentMonthYear(): string {
+  const now = new Date()
+  const month = now.toLocaleString('en-US', { month: 'long' })
+  const year = now.getFullYear()
+  return `${month} ${year}`
+}
+
 const tickerItems = [
   'IRS Campaign 685 actively targeting Act 60 holders',
   '100+ decree holders under investigation (GAO Report)',
@@ -17,7 +24,137 @@ const tickerItems = [
   'PR Hacienda sharing data with IRS since 2024',
   '40% penalty for gross transfer pricing misstatements',
   'BDO PR Tax Division head indicted for Act 60 violations',
+  `Updated ${getCurrentMonthYear()}: IRS allocating $80M+ to Act 60 enforcement`,
 ]
+
+function ComplianceGauge() {
+  const radius = 36
+  const circumference = 2 * Math.PI * radius
+  const score = 47
+  const offset = circumference - (score / 100) * circumference
+
+  return (
+    <svg width="96" height="96" viewBox="0 0 96 96" className="block">
+      <circle
+        cx="48"
+        cy="48"
+        r={radius}
+        fill="none"
+        stroke="rgba(255,255,255,0.06)"
+        strokeWidth="6"
+      />
+      <circle
+        cx="48"
+        cy="48"
+        r={radius}
+        fill="none"
+        stroke="url(#gaugeGradient)"
+        strokeWidth="6"
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        transform="rotate(-90 48 48)"
+      />
+      <defs>
+        <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#EF4444" />
+          <stop offset="100%" stopColor="#F97316" />
+        </linearGradient>
+      </defs>
+      <text
+        x="48"
+        y="44"
+        textAnchor="middle"
+        className="fill-slate-100 text-lg font-semibold"
+        style={{ fontSize: '18px', fontWeight: 600 }}
+      >
+        47/100
+      </text>
+      <text
+        x="48"
+        y="60"
+        textAnchor="middle"
+        className="fill-slate-500"
+        style={{ fontSize: '9px', letterSpacing: '0.05em' }}
+      >
+        COMPLIANCE
+      </text>
+    </svg>
+  )
+}
+
+function FloatingCards() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisible(true), 1500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (!visible) return null
+
+  return (
+    <div className="hidden lg:block absolute inset-0 pointer-events-none" aria-hidden="true">
+      {/* Compliance Score Gauge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className="glass-accent absolute top-32 right-12 xl:right-24 rounded-xl p-4 shadow-lg"
+        style={{
+          animation: 'float 20s ease-in-out infinite',
+          willChange: 'transform',
+        }}
+      >
+        <ComplianceGauge />
+      </motion.div>
+
+      {/* Notification Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="glass absolute top-72 right-4 xl:right-12 rounded-lg px-4 py-3 shadow-lg"
+        style={{
+          animation: 'float 20s ease-in-out infinite 7s',
+          willChange: 'transform',
+        }}
+      >
+        <div className="flex items-center gap-2.5">
+          <span className="relative flex h-2.5 w-2.5 shrink-0">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75 animate-ping" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
+          </span>
+          <span className="text-sm text-slate-300 font-medium whitespace-nowrap">
+            3 critical issues found
+          </span>
+        </div>
+      </motion.div>
+
+      {/* CPA Verified Badge */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="glass-accent absolute top-[22rem] right-32 xl:right-44 rounded-full px-3.5 py-2 shadow-lg"
+        style={{
+          animation: 'float 20s ease-in-out infinite 14s',
+          willChange: 'transform',
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="shrink-0">
+            <circle cx="8" cy="8" r="8" fill="#22C55E" fillOpacity="0.2" />
+            <path d="M5 8L7 10L11 6" stroke="#22C55E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className="text-xs text-slate-300 font-semibold tracking-wide whitespace-nowrap">
+            CPA Verified
+          </span>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
 
 export default function Hero({ brand }: HeroProps) {
   const [tickerIndex, setTickerIndex] = useState(0)
@@ -105,6 +242,9 @@ export default function Hero({ brand }: HeroProps) {
 
       {/* Main hero content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-36">
+        {/* Floating glassmorphism cards — lg+ only */}
+        <FloatingCards />
+
         <div className="max-w-3xl">
           {/* Eyebrow */}
           <motion.p

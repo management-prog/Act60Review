@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, FileText, ArrowRight, Loader2, Check } from 'lucide-react'
 import type { BrandConfig } from '@/config/brands'
@@ -9,17 +9,21 @@ interface LeadMagnetPopupProps {
   brand: BrandConfig
 }
 
+type TriggerType = 'time' | 'exit-intent'
+
 export default function LeadMagnetPopup({ brand }: LeadMagnetPopupProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const triggerRef = useRef<TriggerType>('time')
 
   const storageKey = `lead-magnet-shown-${brand.id}`
 
-  const showPopup = useCallback(() => {
+  const showPopup = useCallback((trigger: TriggerType) => {
     const alreadyShown = sessionStorage.getItem(storageKey)
     if (!alreadyShown) {
+      triggerRef.current = trigger
       setIsOpen(true)
       sessionStorage.setItem(storageKey, '1')
     }
@@ -27,12 +31,12 @@ export default function LeadMagnetPopup({ brand }: LeadMagnetPopupProps) {
 
   useEffect(() => {
     // Show after 30 seconds
-    const timer = setTimeout(showPopup, 30000)
+    const timer = setTimeout(() => showPopup('time'), 30000)
 
     // Exit intent (mouse leaves viewport top)
     function handleMouseLeave(e: MouseEvent) {
       if (e.clientY <= 0) {
-        showPopup()
+        showPopup('exit-intent')
       }
     }
     document.addEventListener('mouseleave', handleMouseLeave)
@@ -42,6 +46,20 @@ export default function LeadMagnetPopup({ brand }: LeadMagnetPopupProps) {
       document.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [showPopup])
+
+  const isExitIntent = triggerRef.current === 'exit-intent'
+
+  const headline = isExitIntent
+    ? 'Before you go...'
+    : brand.leadMagnet.title
+
+  const description = isExitIntent
+    ? `87% of decree holders have at least one compliance gap. ${brand.leadMagnet.description}`
+    : brand.leadMagnet.description
+
+  const ctaLabel = isExitIntent
+    ? `Get the ${brand.leadMagnet.type === 'pdf' ? 'checklist' : 'score'} (free)`
+    : `Get Free ${brand.leadMagnet.type === 'pdf' ? 'Checklist' : 'Score'}`
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -124,16 +142,16 @@ export default function LeadMagnetPopup({ brand }: LeadMagnetPopupProps) {
                     </div>
                     <div>
                       <p className="text-[10px] text-accent/70 uppercase tracking-widest font-semibold mb-1">
-                        Free {brand.leadMagnet.type === 'pdf' ? 'Download' : 'Tool'}
+                        {isExitIntent ? 'Wait' : `Free ${brand.leadMagnet.type === 'pdf' ? 'Download' : 'Tool'}`}
                       </p>
                       <h3 className="font-serif text-lg text-slate-100 leading-snug">
-                        {brand.leadMagnet.title}
+                        {headline}
                       </h3>
                     </div>
                   </div>
 
                   <p className="text-sm text-slate-400 mb-4">
-                    {brand.leadMagnet.description}
+                    {description}
                   </p>
 
                   <ul className="space-y-2 mb-6">
@@ -172,7 +190,7 @@ export default function LeadMagnetPopup({ brand }: LeadMagnetPopupProps) {
                         </>
                       ) : (
                         <>
-                          Get Free {brand.leadMagnet.type === 'pdf' ? 'Checklist' : 'Score'}
+                          {ctaLabel}
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                         </>
                       )}
