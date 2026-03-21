@@ -17,6 +17,7 @@ export interface BrandConfig {
   name: string
   logoName: [string, string]
   domain: string
+  gaId: string
   tagline: string
   description: string
   tier: 'premium' | 'diy' | 'defense'
@@ -63,6 +64,7 @@ const brands: Record<string, BrandConfig> = {
     name: 'Act 60 Review',
     logoName: ['Act 60 ', 'Review'],
     domain: 'act60review.com',
+    gaId: process.env.NEXT_PUBLIC_GA_ID_ACT60REVIEW || '',
     tagline: 'AI-Powered Tax Return Review for Act 60 Decree Holders',
     description: 'Get a comprehensive AI review of your Puerto Rico tax return in under 24 hours. Catch errors before the IRS does.',
     tier: 'premium',
@@ -107,6 +109,7 @@ const brands: Record<string, BrandConfig> = {
     name: 'DecreeCheck',
     logoName: ['Decree', 'Check'],
     domain: 'decreecheck.com',
+    gaId: process.env.NEXT_PUBLIC_GA_ID_DECREECHECK || '',
     tagline: 'Quick Compliance Check for Your Act 60 Return',
     description: 'Run a fast AI scan on your PR tax return. Know your risk level in minutes, not weeks.',
     tier: 'diy',
@@ -151,6 +154,7 @@ const brands: Record<string, BrandConfig> = {
     name: 'Act 60 Shield',
     logoName: ['Act 60 ', 'Shield'],
     domain: 'act60shield.com',
+    gaId: process.env.NEXT_PUBLIC_GA_ID_ACT60SHIELD || '',
     tagline: 'Audit Defense Intelligence for Act 60 Holders',
     description: 'Comprehensive review + audit preparation package. Know exactly where you stand before the IRS comes knocking.',
     tier: 'defense',

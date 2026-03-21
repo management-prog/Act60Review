@@ -50,18 +50,22 @@ export default async function RootLayout({
   return (
     <html lang="en" className="dark" data-brand={brand.id}>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-navy-900 text-slate-100`}>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-E45JBVPNT4"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-E45JBVPNT4');
-          `}
-        </Script>
+        {brand.gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${brand.gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${brand.gaId}');
+              `}
+            </Script>
+          </>
+        )}
         <JsonLd brand={brand} />
         {children}
       </body>
