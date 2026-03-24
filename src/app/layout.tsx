@@ -140,7 +140,7 @@ export default async function RootLayout({
           `}
         </Script>
 
-        {/ Mailchimp Connected Sites */}
+  {/* Mailchimp Connected Sites */}
        <Script
           id="mcjs"
           strategy="afterInteractive"
