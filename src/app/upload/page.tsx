@@ -281,6 +281,7 @@ function UploadPageContent() {
                 //   ))}
                 // </div>
                   <div
+<div
   key={f.id}
   className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 bg-gray-900/50 border border-gray-800 rounded-xl p-4"
 >
