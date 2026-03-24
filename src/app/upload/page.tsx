@@ -2,6 +2,7 @@
 
 import { Suspense, useState, useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
+
 import { motion } from 'framer-motion'
 import { Upload, FileText, X, Shield, ArrowRight, Loader2, CheckCircle, Lock } from 'lucide-react'
 import { getBrandConfig } from '@/config/brands'
