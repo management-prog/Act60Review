@@ -13,7 +13,7 @@ export default function MailchimpScript() {
     script.src =
       "https://chimpstatic.com/mcjs-connected/js/users/238e8706cacc18ff4b54d48b0/bee013cf34f2cad29216485ca.js";
 
-    document.body.appendChild(script);
+      document.head.appendChild(script); 
 
     return () => {
       document.getElementById("mcjs")?.remove();
