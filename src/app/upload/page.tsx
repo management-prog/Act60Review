@@ -282,11 +282,13 @@ function UploadPageContent() {
               )}
 
               {/* Error */}
-              {error && (
-                <div className="mt-4 bg-red-950/50 border border-red-900/50 rounded-xl p-4">
-                  <p className="text-sm text-red-400">{error}</p>
-                </div>
-              )}
+             {error && (
+           <div className="mt-4 bg-red-950/50 border border-red-900/50 rounded-xl p-4 overflow-hidden">
+             <p className="text-sm text-red-400 break-words whitespace-pre-wrap">
+                {error}
+            </p>
+           </div>
+            )}
 
               {/* Submit */}
               <div className="mt-8 flex flex-col items-center gap-4">
