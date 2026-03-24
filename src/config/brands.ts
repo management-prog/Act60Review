@@ -1,6 +1,7 @@
 export interface BrandConfig {
   id: 'act60review' | 'decreecheck' | 'act60shield'
   name: string
+  mailchimpId?: string
   logoName: [string, string]
   domain: string
   tagline: string
@@ -39,6 +40,7 @@ const brands: Record<string, BrandConfig> = {
   act60review: {
     id: 'act60review',
     name: 'Act 60 Review',
+    mailchimpId: 'bee013cf34f2cad29216485ca',
     logoName: ['Act 60 ', 'Review'],
     domain: 'act60review.com',
     tagline: 'AI-Powered Tax Return Review for Act 60 Decree Holders',
@@ -87,6 +89,7 @@ const brands: Record<string, BrandConfig> = {
   act60shield: {
     id: 'act60shield',
     name: 'Act 60 Shield',
+    mailchimpId: '9c6ca648da35a2507dff94b78',
     logoName: ['Act 60 ', 'Shield'],
     domain: 'act60shield.com',
     tagline: 'Audit Defense Intelligence for Act 60 Holders',
