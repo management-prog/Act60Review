@@ -8,12 +8,14 @@ import Pricing from '@/components/landing/Pricing'
 import FAQ from '@/components/landing/FAQ'
 import FinalCTA from '@/components/landing/FinalCTA'
 import Footer from '@/components/layout/Footer'
+import MailchimpScript from '@/components/landing/MailchimpScript'
 
 export default async function Home() {
   const brand = await getBrandFromHeaders()
 
   return (
     <>
+       <MailchimpScript />
       <Navbar brand={brand} />
       <main>
         <Hero brand={brand} />
