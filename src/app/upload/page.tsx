@@ -251,80 +251,46 @@ function UploadPageContent() {
               {files.length > 0 && (
                 <div className="mt-6 space-y-3">
                   {files.map((f) => (
-                //     <div
-                //       key={f.id}
-                //       className="flex items-center gap-4 bg-gray-900/50 border border-gray-800 rounded-xl p-4"
-                //     >
-                //       <FileText className="w-5 h-5 text-blue-400 shrink-0" />
-                //       <div className="flex-1 min-w-0">
-                //         <p className="text-sm text-white truncate">{f.file.name}</p>
-                //         <p className="text-xs text-gray-500">
-                //           {(f.file.size / 1024 / 1024).toFixed(1)} MB
-                //         </p>
-                //       </div>
-                //       <select
-                //         value={f.label}
-                //         onChange={(e) => updateLabel(f.id, e.target.value)}
-                //         className="bg-gray-800 border border-gray-700 text-sm text-gray-300 rounded-lg px-3 py-1.5 focus:ring-blue-500 focus:border-blue-500"
-                //       >
-                //         {Object.entries(fileLabels).map(([value, label]) => (
-                //           <option key={value} value={value}>{label}</option>
-                //         ))}
-                //       </select>
-                //       <button
-                //         onClick={(e) => { e.stopPropagation(); removeFile(f.id) }}
-                //         className="text-gray-500 hover:text-red-400 transition-colors"
-                //       >
-                //         <X className="w-4 h-4" />
-                //       </button>
-                //     </div>
-                //   ))}
-                // </div>
-                  <div
-<div
+                   <div
   key={f.id}
-  className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 bg-gray-900/50 border border-gray-800 rounded-xl p-4"
+  className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 bg-gray-900/50 border border-gray-800 rounded-xl p-3 sm:p-4"
 >
-  {/* Top Section: Icon and Name */}
+  {/* Group 1: File Info */}
   <div className="flex items-center gap-3 flex-1 min-w-0">
     <FileText className="w-5 h-5 text-blue-400 shrink-0" />
-    <div className="min-w-0 flex-1">
-      <p className="text-sm text-white truncate font-medium">{f.file.name}</p>
+    <div className="flex-1 min-w-0">
+      <p className="text-sm text-white truncate">{f.file.name}</p>
       <p className="text-xs text-gray-500">
         {(f.file.size / 1024 / 1024).toFixed(1)} MB
       </p>
     </div>
-    
-    {/* Delete button moved here for mobile logic (top right) */}
-    <button
-      onClick={(e) => { e.stopPropagation(); removeFile(f.id) }}
-      className="sm:hidden text-gray-500 hover:text-red-400 p-1"
-    >
-      <X className="w-4 h-4" />
-    </button>
   </div>
 
-  {/* Bottom Section: Dropdown */}
-  <div className="flex items-center gap-2">
+  {/* Group 2: Actions (Dropdown & Delete) */}
+  <div className="flex items-center gap-3 w-full sm:w-auto">
     <select
       value={f.label}
       onChange={(e) => updateLabel(f.id, e.target.value)}
-      className="w-full sm:w-auto bg-gray-800 border border-gray-700 text-sm text-gray-300 rounded-lg px-3 py-1.5 focus:ring-blue-500 focus:border-blue-500"
+      className="flex-1 sm:flex-none sm:w-auto bg-gray-800 border border-gray-700 text-sm text-gray-300 rounded-lg px-3 py-1.5 focus:ring-blue-500 focus:border-blue-500"
     >
       {Object.entries(fileLabels).map(([value, label]) => (
         <option key={value} value={value}>{label}</option>
       ))}
     </select>
-
-    {/* Delete button for Desktop (hidden on mobile) */}
+    
     <button
       onClick={(e) => { e.stopPropagation(); removeFile(f.id) }}
-      className="hidden sm:block text-gray-500 hover:text-red-400 transition-colors"
+      className="text-gray-500 hover:text-red-400 transition-colors p-2 sm:p-0 shrink-0"
+      aria-label="Remove file"
     >
-      <X className="w-4 h-4" />
+      <X className="w-5 h-5 sm:w-4 sm:h-4" />
     </button>
   </div>
 </div>
+                  ))}
+                </div>
+         
+
               )}
 
               {/* Error */}
