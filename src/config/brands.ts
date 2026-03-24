@@ -2,6 +2,7 @@ export interface BrandConfig {
   id: 'act60review' | 'decreecheck' | 'act60shield'
   name: string
   mailchimpId?: string
+  gaId?: string;
   logoName: [string, string]
   domain: string
   tagline: string
