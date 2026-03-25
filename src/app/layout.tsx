@@ -126,6 +126,29 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="dark" data-brand={brand.id}>
+      <head>
+        {/* Use a standard script tag for guaranteed <head> placement */}
+        {brand.mailchimpId && (
+          <script
+            id="mcjs"
+            dangerouslySetInnerHTML={{
+              __html: `
+                !function(c,h,i,m,p){
+                  m=c.createElement(h),
+                  p=c.getElementsByTagName(h)[0],
+                  m.async=1,
+                  m.src=i,
+                  p.parentNode.insertBefore(m,p)
+                }(
+                  document,
+                  "script",
+                  "https://chimpstatic.com/mcjs-connected/js/users/238e8706cacc18ff4b54d48b0/${brand.mailchimpId}.js"
+                );
+              `,
+            }}
+          />
+        )}
+      </head>
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-navy-900 text-slate-100`}
       >
@@ -143,25 +166,7 @@ export default async function RootLayout({
           `}
         </Script>
 
-        {/* Mailchimp Connected Sites (dynamic per brand) */}
-        {brand.mailchimpId && (
-          <Script id="mcjs" strategy="beforeInteractive">
-            {`
-              !function(c,h,i,m,p){
-                m=c.createElement(h),
-                p=c.getElementsByTagName(h)[0],
-                m.async=1,
-                m.src=i,
-                p.parentNode.insertBefore(m,p)
-              }(
-                document,
-                "script",
-                "https://chimpstatic.com/mcjs-connected/js/users/238e8706cacc18ff4b54d48b0/${brand.mailchimpId}.js"
-              );
-            `}
-          </Script>
-        )}
-
+    
         <JsonLd brand={brand} />
         {children}
       </body>
