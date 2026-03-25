@@ -67,6 +67,7 @@ const brands: Record<string, BrandConfig> = {
   decreecheck: {
     id: 'decreecheck',
     name: 'DecreeCheck',
+     mailchimpId: '5b821a7c0f81f9fa64fa9084f',
     logoName: ['Decree', 'Check'],
     domain: 'decreecheck.com',
     tagline: 'Quick Compliance Check for Your Act 60 Return',
