@@ -145,7 +145,7 @@ export default async function RootLayout({
 
         {/* Mailchimp Connected Sites (dynamic per brand) */}
         {brand.mailchimpId && (
-          <Script id="mcjs" strategy="afterInteractive">
+          <Script id="mcjs" strategy="beforeInteractive">
             {`
               !function(c,h,i,m,p){
                 m=c.createElement(h),
